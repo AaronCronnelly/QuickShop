@@ -245,15 +245,6 @@ nav ul li a {
   }
 }
 
-/* App.css */
-
-/* General Reset */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 /* Shopping List Container */
 .shopping-list-container {
   max-width: 600px;
