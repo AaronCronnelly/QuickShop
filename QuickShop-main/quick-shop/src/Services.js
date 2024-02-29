@@ -1,16 +1,19 @@
 import React from 'react';
 import './App'; 
+import { Link } from 'react-router-dom';
 
 import service1 from './assets/images/service1.jpg';
 import service2 from './assets/images/service2.jpg';
 import service3 from './assets/images/service3.jpg';
 
-const ServiceCard = ({ image, title, description, buttonText }) => (
+const ServiceCard = ({ image, title, description, buttonText, link }) => (
   <div className="service-card">
     <img src={image} alt={title} className="service-image" />
     <h3>{title}</h3>
     <p className="service-description">{description}</p>
-    <button className="btn-book">{buttonText}</button>
+    <Link to={link} className="btn-book">
+      {buttonText}
+    </Link>
   </div>
 );
 
@@ -24,6 +27,7 @@ const Services = () => {
           title="Shopping List"
           description="Click here to begin making your shopping list"
           buttonText="Start List"
+          link="/shopping-list"
         />
         <ServiceCard
           image={service2}

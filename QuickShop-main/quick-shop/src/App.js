@@ -7,6 +7,7 @@ import About from './About';
 import Services from './Services';
 import './App.css';
 import Login from './Login';
+import ShoppingList from './ShoppingList';
 
 const App = () => {
   return (
