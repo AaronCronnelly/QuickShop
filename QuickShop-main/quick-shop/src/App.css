@@ -245,6 +245,108 @@ nav ul li a {
   }
 }
 
+/* App.css */
+
+/* General Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Shopping List Container */
+.shopping-list-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+
+.shopping-list-title {
+  text-align: center;
+  color: #333;
+  font-family: 'Arial', sans-serif;
+  margin-bottom: 30px;
+}
+
+/* Form Styles */
+.shopping-list-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.shopping-list-input {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.shopping-list-button {
+  background-color: #5cb85c;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.shopping-list-button:hover {
+  background-color: #4cae4c; /* A shade darker for hover state */
+}
+
+/* List Styles */
+.shopping-list-items {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.shopping-list-item {
+  background-color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Button Styles */
+.edit-item-button,
+.delete-item-button {
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.edit-item-button {
+  background-color: #f0ad4e;
+  color: white;
+}
+
+.delete-item-button {
+  background-color: #d9534f; 
+  color: white;
+}
+
+.edit-item-button:hover {
+  background-color: #ec971f;
+}
+
+.delete-item-button:hover {
+  background-color: #c9302c;
+}
+
+
+
 
 
 
