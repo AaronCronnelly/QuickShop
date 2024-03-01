@@ -1,7 +1,8 @@
-const {MongoClient, ClientSession} = require('mongodb');
+const {MongoClient} = require('mongodb');
 
-const uri = 'mongodb+srv://Admin:<password>@fooddatalist.zeatvsu.mongodb.net/?retryWrites=true&w=majority&appName=FoodDataList';
+const uri = 'mongodb+srv://Admin:Admin@fooddatalist.zeatvsu.mongodb.net/?retryWrites=true&w=majority&appName=FoodDataList';
 
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 async function connectToDatabase(){
     try{
         await client.connect();

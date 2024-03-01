@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { connectToDatabase } from './DatabaseCon';
 import { checkItemInDatabase } from './ItemChecker';
-import { closeDatabaseConnection } from './DatabaseCon';
 connectToDatabase();
 
 
@@ -20,7 +19,7 @@ const ShoppingList = () => {
         setQuantity(event.target.value);
     };
 
-    const handleAddItem = async(event) => {
+    const handleAddItem = async (event) => {
         event.preventDefault();
         if (!newItemName) return; // Basic validation
 
@@ -29,9 +28,10 @@ const ShoppingList = () => {
         //Checking user item exist
         checkItemInDatabase(newItemName).then((exists) => {
             if (exists) {
-                console.log('${newItemName} exists in the database.');
+                console.log("works");
             } else {
-                alert('${newItemName} does not exists in database');
+                // alert('${newItemName} does not exists in database'); need to slove error
+                alert('error');
             }
         }
         );
