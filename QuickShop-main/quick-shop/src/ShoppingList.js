@@ -1,4 +1,10 @@
 import React, { useState } from 'react';
+import { connectToDatabase } from './DatabaseCon';
+import { checkItemInDatabase } from './ItemChecker';
+import { closeDatabaseConnection } from './DatabaseCon';
+connectToDatabase();
+
+
 
 const ShoppingList = () => {
     const [items, setItems] = useState([]);
@@ -14,11 +20,22 @@ const ShoppingList = () => {
         setQuantity(event.target.value);
     };
 
-    const handleAddItem = (event) => {
+    const handleAddItem = async(event) => {
         event.preventDefault();
         if (!newItemName) return; // Basic validation
 
         const newItem = { name: newItemName, quantity: Number(quantity) };
+
+        //Checking user item exist
+        checkItemInDatabase(newItemName).then((exists) => {
+            if (exists) {
+                console.log('${newItemName} exists in the database.');
+            } else {
+                alert('${newItemName} does not exists in database');
+            }
+        }
+        );
+
         if (editIndex >= 0) {
             // Edit existing item
             const updatedItems = items.map((item, index) =>
@@ -56,19 +73,19 @@ const ShoppingList = () => {
         <div className="shopping-list-container">
             <h1 className="shopping-list-title">Create Your Shopping List</h1>
             <form onSubmit={handleAddItem} className="shopping-list-form">
-                <input 
-                    type="text" 
-                    placeholder="Item name" 
-                    value={newItemName} 
-                    onChange={handleNewItemNameChange} 
+                <input
+                    type="text"
+                    placeholder="Item name"
+                    value={newItemName}
+                    onChange={handleNewItemNameChange}
                     className="shopping-list-input"
                 />
-                <input 
-                    type="number" 
-                    placeholder="Quantity" 
-                    value={quantity} 
-                    min="1" 
-                    onChange={handleQuantityChange} 
+                <input
+                    type="number"
+                    placeholder="Quantity"
+                    value={quantity}
+                    min="1"
+                    onChange={handleQuantityChange}
                     className="shopping-list-input"
                 />
                 <button type="submit" className="shopping-list-button">
