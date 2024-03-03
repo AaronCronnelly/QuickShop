@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { connectToDatabase } from './DatabaseCon';
-import { checkItemInDatabase } from './ItemChecker';
-connectToDatabase();
+
 
 
 
@@ -24,18 +22,6 @@ const ShoppingList = () => {
         if (!newItemName) return; // Basic validation
 
         const newItem = { name: newItemName, quantity: Number(quantity) };
-
-        //Checking user item exist
-        checkItemInDatabase(newItemName).then((exists) => {
-            if (exists) {
-                console.log("works");
-            } else {
-                // alert('${newItemName} does not exists in database'); need to slove error
-                alert('error');
-            }
-        }
-        );
-
         if (editIndex >= 0) {
             // Edit existing item
             const updatedItems = items.map((item, index) =>
