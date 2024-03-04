@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 
 
@@ -8,6 +8,25 @@ const ShoppingList = () => {
     const [newItemName, setNewItemName] = useState('');
     const [quantity, setQuantity] = useState(1);
     const [editIndex, setEditIndex] = useState(-1);
+
+    //Getting item from database
+    useEffect(() => {
+        async function fetchItems() {
+            try {
+                const response = await axios.get('/api/item'); j
+                setItems(response.data);
+            } catch (error) {
+                console.error('Error fetching items: ', error);
+            }
+        }
+        fetchItems();
+    }, []);
+
+    //Compaing user entered item to fetch database item
+    useEffect(()=> {
+        const matching = items.filter(item=> item.name.toLowerCase() == newItemName.toLowerCase());
+        setMatchingItems(matching);
+    }, [items, newItemName]);``
 
     const handleNewItemNameChange = (event) => {
         setNewItemName(event.target.value);

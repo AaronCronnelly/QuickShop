@@ -15,7 +15,7 @@ app.use(function (req, res, next) {
 
 //Starting server
 app.listen(port, () => {
-    console.log('server is running on port ${port}');
+    console.log("server is running on port :" ,port);
 });
 
 app.use(cors());
@@ -26,7 +26,7 @@ app.use(bodyParser.json());
 
 const mongoose = require('mongoose');
 
-mainModule().catch(err => console.log(err));
+main().catch(err => console.log(err));
 
 async function main() {
     try {
