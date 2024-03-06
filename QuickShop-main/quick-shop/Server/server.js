@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 4000;
+const port = 3000;
 const cors = require('cors');
 const path = require('path');
 
@@ -15,7 +15,7 @@ app.use(function (req, res, next) {
 
 //Starting server
 app.listen(port, () => {
-    console.log("server is running on port :" ,port);
+    console.log("server is running on port :${port}");
 });
 
 app.use(cors());

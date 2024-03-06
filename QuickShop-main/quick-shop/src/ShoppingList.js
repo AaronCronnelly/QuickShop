@@ -13,7 +13,7 @@ const ShoppingList = () => {
     useEffect(() => {
         async function fetchItems() {
             try {
-                const response = await axios.get('/api/item'); j
+                const response = await axios.get('/api/item'); 
                 setItems(response.data);
             } catch (error) {
                 console.error('Error fetching items: ', error);
