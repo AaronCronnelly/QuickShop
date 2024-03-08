@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 5001;
 const cors = require('cors');
 const path = require('path');
 
@@ -11,11 +11,6 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
-});
-
-//Starting server
-app.listen(port, () => {
-    console.log("server is running on port :${port}");
 });
 
 app.use(cors());
@@ -37,7 +32,7 @@ async function main() {
     }
 }
 
-//Define foodItems and monndel for MongoDB
+// Define foodItems and model for MongoDB
 const foodItemsScheme = new mongoose.Schema({
     name: String,
 });
