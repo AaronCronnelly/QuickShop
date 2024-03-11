@@ -211,7 +211,7 @@ nav ul li a {
   display: flex;
   justify-content: center;
   gap: 20px;
-  margin-bottom: 2.5rem;
+  margin-bottom: 5rem;
 }
 
 .service-card {
@@ -470,6 +470,50 @@ nav ul li a {
     grid-template-columns: 1fr; /* Stack the stories on smaller screens */
   }
 }
+
+/* ThreeStepGuide.css */
+
+.three-step-guide {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  text-align: center;
+  background-color: #f0f0f0;
+  margin-top: 5rem;
+  margin-bottom: 3.5rem;
+}
+
+.step {
+  width: 30%;
+  padding: 10px;
+}
+
+.icon-container {
+  background-color: #FFCC57;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.icon-container .fa-user, .fa-cart-shopping, .fa-Map {
+  font-size: 2em;
+}
+
+@media (max-width: 768px) {
+  .three-step-guide {
+    flex-direction: column;
+  }
+  .step {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
 
 
 

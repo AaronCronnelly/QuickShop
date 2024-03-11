@@ -12,7 +12,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-links">
         <NavLink to="/" exact activeClassName="navbar-active">Home</NavLink>
-        <NavLink to="#about-section" activeClassName="navbar-active">About</NavLink>
+        {/*<NavLink to="#about-section" activeClassName="navbar-active">About</NavLink>*/}
         <NavLink to="/login" activeClassName="navbar-active">Login</NavLink>
         <NavLink to="/services" activeClassName="navbar-active">Services</NavLink>
         {/* Make sure your route paths are correctly defined */}

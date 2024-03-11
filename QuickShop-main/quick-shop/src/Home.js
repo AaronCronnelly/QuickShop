@@ -4,6 +4,8 @@ import aboutImage from './assets/images/about-image.jpg';
 import Services from './Services';
 import SubscriptionForm from './SubscriptionForm';
 import Success from './Success';
+import ThreeStepGuide from './ThreeStepGuide';
+
 
 const Home = () => {
   return (
@@ -27,6 +29,7 @@ const Home = () => {
           <img src={aboutImage} alt="About Us" />
         </div>
       </div>
+      <ThreeStepGuide/>
       <Services />
       <SubscriptionForm />
       <Success />
