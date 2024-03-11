@@ -319,7 +319,7 @@ nav ul li a {
 }
 
 .edit-item-button {
-  background-color: #f0ad4e;
+  background-color: #FFCC57;
   color: white;
 }
 
@@ -335,6 +335,74 @@ nav ul li a {
 .delete-item-button:hover {
   background-color: #c9302c;
 }
+
+/* SubscriptionForm */
+
+.form-header {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: #333;
+  font-family: 'Roboto Slab', serif;
+}
+
+.subscription-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  background-color: #FFCC57;
+}
+
+.form-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.email-input {
+  width: 300px;
+  height: 50px;
+  padding: 0 15px; 
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: 'Roboto Slab', serif;
+}
+
+.subscription-message {
+  margin-top: 20px;
+  text-align: center;
+  color: #3B3B3B;
+  font-family: 'Roboto Slab', serif;
+}
+
+.subscribe-button {
+  padding: 0 20px;
+  height: 50px;
+  font-size: 18px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #3B3B3B;
+  color: white;
+  font-family: 'Roboto Slab', serif;
+}
+
+
+
+/* Adjust the form layout on smaller screens */
+@media (max-width: 600px) {
+  .subscription-form {
+    flex-direction: column;
+  }
+
+  .email-input {
+    margin-right: 0;
+    margin-bottom: 10px; /* Add space between the input and button on small screens */
+  }
+}
+
 
 
 
