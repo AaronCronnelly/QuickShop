@@ -1,4 +1,6 @@
-
+* {
+  font-family: 'Roboto Slab', serif;
+}
 body {
   background-color: #3B3B3B;
 }
@@ -389,8 +391,6 @@ nav ul li a {
   font-family: 'Roboto Slab', serif;
 }
 
-
-
 /* Adjust the form layout on smaller screens */
 @media (max-width: 600px) {
   .subscription-form {
@@ -402,6 +402,75 @@ nav ul li a {
     margin-bottom: 10px; /* Add space between the input and button on small screens */
   }
 }
+
+/* Success stories */
+
+.user-success-stories {
+  background-color: #f0f0f0;
+  padding: 50px;
+  text-align: center;
+}
+
+.user-success-stories h2 {
+  margin-bottom: 30px;
+  color: #000;
+}
+
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.story {
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background-color: #3B3B3B;
+  color: #fff;
+}
+
+
+.story-img {
+  max-width: 100px;
+  margin: 0 auto;
+  border-radius: 50%;
+}
+
+.blockquote {
+  font-style: italic;
+  color: white;
+}
+
+.user-name {
+  color: #ffffff;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.rating {
+  color: #ffcc00;
+  margin: 10px 0;
+}
+
+.cta-button {
+  background-color: #FFCC57;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 768px) {
+  .stories-grid {
+    grid-template-columns: 1fr; /* Stack the stories on smaller screens */
+  }
+}
+
 
 
 

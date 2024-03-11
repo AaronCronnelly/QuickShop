@@ -3,6 +3,7 @@ import backgroundImage from './assets/images/hero.jpg';
 import aboutImage from './assets/images/about-image.jpg'; 
 import Services from './Services';
 import SubscriptionForm from './SubscriptionForm';
+import Success from './Success';
 
 const Home = () => {
   return (
@@ -28,6 +29,7 @@ const Home = () => {
       </div>
       <Services />
       <SubscriptionForm />
+      <Success />
     </>
   );
 };
