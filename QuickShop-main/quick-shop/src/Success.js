@@ -3,6 +3,8 @@ import './App.css';
 import test1 from './assets/images/test1.jpg';
 import test2 from './assets/images/test2.jpg';
 import test3 from './assets/images/test3.jpg';
+import { Link } from 'react-router-dom';
+
 
 function Success() {
     return (
@@ -38,7 +40,9 @@ function Success() {
           <div className="rating">★★★★★</div>
         </div>
         </div>
-        <button className="cta-button">Start Saving Time</button>
+        <Link to="/shopping-list" className="cta-button">
+        Start Saving Time
+        </Link>
       </div>
     );
   }

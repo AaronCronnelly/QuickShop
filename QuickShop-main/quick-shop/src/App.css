@@ -239,6 +239,7 @@ nav ul li a {
   color: black;
   border: none;
   cursor: pointer;
+  text-decoration: none;
 }
 
 @media (max-width: 768px) {
@@ -462,6 +463,8 @@ nav ul li a {
   border-radius: 5px;
   cursor: pointer;
   font-size: 18px;
+  margin-top: 6px!important;
+  text-decoration: none;
 }
 
 /* Responsive grid adjustments */
@@ -513,6 +516,67 @@ nav ul li a {
     margin-bottom: 20px;
   }
 }
+
+/* Footer.css */
+
+.site-footer {
+  background-color: #FFCC57; /* Keep the top part of the footer orange */
+  color: #000;
+  padding: 20px 0;
+  font-size: 14px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 0 50px;
+}
+
+.footer-section {
+  margin-right: 20px;
+}
+
+.footer-section h4 {
+  color: #000;
+  margin-bottom: 15px;
+}
+
+.footer-section p,
+.footer-section ul,
+.footer-section li,
+.footer-section a {
+  color: #000;
+  line-height: 1.6;
+  text-decoration: none;
+}
+
+.footer-section a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 1rem;
+  border-top: 1px solid #444;
+  background-color: #3B3B3B !important; /* Change this to grey */
+  color: #FFFFFF; /* Adjust text color for contrast */
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  .footer-section {
+    margin-bottom: 20px;
+  }
+}
+
+
 
 
 
