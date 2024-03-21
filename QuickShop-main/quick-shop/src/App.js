@@ -8,6 +8,7 @@ import Services from './Services';
 import './App.css';
 import Login from './Login';
 import ShoppingList from './ShoppingList';
+import RegisterPage from './RegisterPage';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="/About" element={<About/>} />
           <Route path="/services" element={<Services/>} />
           <Route path="/shopping-list" element={<ShoppingList />} />
+          <Route path="/RegisterPage" element={<RegisterPage/>} />
         </Routes>
       </div>
     </Router>
