@@ -636,6 +636,22 @@ nav ul li a {
   outline: none;
 }
 
+/* Add to your CSS file */
+.list-and-map-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.shopping-list-container {
+  flex: 1; /* Take up only necessary space */
+  margin-right: 20px; /* Add some spacing between list and map */
+}
+
+.store-map {
+  flex: 2; /* Give the map more room */
+}
+
+
 
 
 

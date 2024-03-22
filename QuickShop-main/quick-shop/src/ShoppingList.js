@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
-
+import StoreMap from './StoreMap';
 
 const ShoppingList = () => {
     const [items, setItems] = useState([]);
@@ -78,7 +77,8 @@ const ShoppingList = () => {
     };
 
     return (
-        <div className="shopping-list-container">
+        <div className="list-and-map-container">
+            <div className="shopping-list-container">
             <h1 className="shopping-list-title">Create Your Shopping List</h1>
             <form onSubmit={handleAddItem} className="shopping-list-form">
                 <input
@@ -109,6 +109,8 @@ const ShoppingList = () => {
                     </li>
                 ))}
             </ul>
+            <StoreMap items={matchingItems} />
+        </div>
         </div>
     );
 };
