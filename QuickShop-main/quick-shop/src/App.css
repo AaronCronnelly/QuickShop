@@ -656,6 +656,20 @@ nav ul li a {
   overflow: hidden; 
 }
 
+.shop-selector {
+  margin-bottom: 1em; /* Add some space below the dropdown */
+  /* Further styling as needed */
+}
+
+.shop-selector label {
+  margin-right: 0.5em;
+}
+
+.shop-selector select {
+  padding: 0.5em;
+  /* Additional styling to match the design of your application */
+}
+
 
 
 

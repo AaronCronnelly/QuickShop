@@ -8,6 +8,8 @@ const ShoppingList = () => {
     const [quantity, setQuantity] = useState(1);
     const [editIndex, setEditIndex] = useState(-1);
     const [matchingItems, setMatchingItems] = useState([]);
+    // state to hold the selected shop
+    const [selectedShop, setSelectedShop] = useState('aldi-galway');
 
     //Getting item from database
     useEffect(() => {
@@ -36,6 +38,10 @@ const ShoppingList = () => {
 
     const handleQuantityChange = (event) => {
         setQuantity(event.target.value);
+    };
+
+    const handleShopChange = (event) => {
+        setSelectedShop(event.target.value);
     };
 
     const handleAddItem = async (event) => {
@@ -109,7 +115,15 @@ const ShoppingList = () => {
                     </li>
                 ))}
             </ul>
+            <div className="shopping-list-page">
+            <div className="shop-selector">
+                <label htmlFor="shop-select">Choose a shop:</label>
+                <select id="shop-select" value={selectedShop} onChange={handleShopChange}>
+                    <option value="aldi-galway">Aldi Galway</option>
+                </select>
+            </div>
             <StoreMap items={matchingItems} />
+        </div>
         </div>
         </div>
     );

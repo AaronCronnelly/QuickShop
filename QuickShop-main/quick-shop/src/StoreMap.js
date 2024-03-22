@@ -1,14 +1,14 @@
 import React from 'react';
 import map from './assets/images/map.png';
 
-const MapComponent = ({ selectedItems }) => {
+const StoreMap = ({ selectedShop, items }) => {
+  // Render the map based on the selectedShop
+
   return (
-    <div className="map-container">
-  <img src={map} alt="Store Layout" className="store-map" />
-</div>
+    <div className="store-map">
+      <img src={map} alt="Store Layout" className="store-map" />
+    </div>
   );
 };
 
-export default MapComponent;
-
-<img src="/assests/images/map.png" alt="Store Layout" className="store-map" />
+export default StoreMap;
