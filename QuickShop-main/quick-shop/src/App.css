@@ -636,20 +636,26 @@ nav ul li a {
   outline: none;
 }
 
-/* Add to your CSS file */
+/* Map */
+
 .list-and-map-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: center; 
+  align-items: start;
+  gap: 20px;
 }
 
 .shopping-list-container {
-  flex: 1; /* Take up only necessary space */
-  margin-right: 20px; /* Add some spacing between list and map */
+  flex: 2;
 }
 
 .store-map {
-  flex: 2; /* Give the map more room */
+  flex: 1;
+  max-width: 600px;
+  height: auto; 
+  overflow: hidden; 
 }
+
 
 
 
