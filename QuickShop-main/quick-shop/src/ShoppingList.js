@@ -44,6 +44,11 @@ const ShoppingList = () => {
         setSelectedShop(event.target.value);
     };
 
+    // GetRoute function
+    const onGetRoute = (selectedShop) => {
+        console.log(`Getting route for: ${selectedShop}`);
+    };
+
     const handleAddItem = async (event) => {
         event.preventDefault();
         if (!newItemName) return; // Basic validation
@@ -121,6 +126,9 @@ const ShoppingList = () => {
                 <select id="shop-select" value={selectedShop} onChange={handleShopChange}>
                     <option value="aldi-galway">Aldi Galway</option>
                 </select>
+                <button className="get-route-button" onClick={() => onGetRoute(selectedShop)}>
+                 Get Route
+                </button>
             </div>
             <StoreMap items={matchingItems} />
         </div>

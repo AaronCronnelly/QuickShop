@@ -520,7 +520,7 @@ nav ul li a {
 /* Footer.css */
 
 .site-footer {
-  background-color: #FFCC57; /* Keep the top part of the footer orange */
+  background-color: #FFCC57;
   color: #000;
   padding: 20px 0;
   font-size: 14px;
@@ -657,8 +657,7 @@ nav ul li a {
 }
 
 .shop-selector {
-  margin-bottom: 1em; /* Add some space below the dropdown */
-  /* Further styling as needed */
+  margin-bottom: 1em;
 }
 
 .shop-selector label {
@@ -667,8 +666,27 @@ nav ul li a {
 
 .shop-selector select {
   padding: 0.5em;
-  /* Additional styling to match the design of your application */
+  margin-right: 1rem;
 }
+
+.store-selector-container {
+  display: flex;
+  align-items: center;
+}
+
+.get-route-button {
+  padding: 10px 15px;
+  background-color: #3B3B3B;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.get-route-button:hover {
+  background-color:  #FFCC57;
+}
+
 
 
 
