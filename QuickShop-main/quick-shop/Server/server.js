@@ -25,7 +25,9 @@ main().catch(err => console.log(err));
 
 async function main() {
     try {
-        await mongoose.connect('mongodb+srv://JohnDoe:JohnDoe@cluster0.g3xygxt.mongodb.net/?retryWrites=true&w=majority');
+       // await mongoose.connect('mongodb+srv://JohnDoe:JohnDoe@cluster0.g3xygxt.mongodb.net/?retryWrites=true&w=majority');
+        await mongoose.connect('mongodb+srv://Admin:Admin@fooddatalist.zeatvsu.mongodb.net/?retryWrites=true&w=majority&appName=FoodDataList');
+        // "mongodb+srv://Admin:Admin@fooddatalist.zeatvsu.mongodb.net/?retryWrites=true&w=majority&appName=FoodDataList"
         //const mongoUri = 'mongodb+srv://Admin:admin@fooddatalist.zeatvsu.mongodb.net/FoodDataList?retryWrites=true&w=majority&appName=FoodDataList';
         
         //await mongoose.connect(mongoUri);   
