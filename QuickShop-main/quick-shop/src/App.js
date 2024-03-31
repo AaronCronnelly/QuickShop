@@ -9,6 +9,7 @@ import './App.css';
 import Login from './Login';
 import ShoppingList from './ShoppingList';
 import RegisterPage from './RegisterPage';
+import Footer from './Footer';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/shopping-list" element={<ShoppingList />} />
           <Route path="/RegisterPage" element={<RegisterPage/>} />
         </Routes>
+        <Footer />
       </div>
     </Router>
   );

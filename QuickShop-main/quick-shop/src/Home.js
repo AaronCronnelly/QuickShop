@@ -5,7 +5,6 @@ import Services from './Services';
 import SubscriptionForm from './SubscriptionForm';
 import Success from './Success';
 import ThreeStepGuide from './ThreeStepGuide';
-import Footer from './Footer';
 import RegisterPage from './RegisterPage';
 
 
@@ -35,7 +34,6 @@ const Home = () => {
       <Services />
       <SubscriptionForm />
       <Success />
-      <Footer />
     </>
   );
 };

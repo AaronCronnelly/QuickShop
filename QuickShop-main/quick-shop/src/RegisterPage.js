@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 
+
 function RegisterPage() {
   const [formData, setFormData] = useState({
     username: '',
