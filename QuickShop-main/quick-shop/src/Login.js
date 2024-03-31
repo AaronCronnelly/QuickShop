@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext'; // Import useAuth hook
 
 function LoginPage() {
   const [loginData, setLoginData] = useState({
@@ -8,6 +9,7 @@ function LoginPage() {
     password: '',
   });
   const navigate = useNavigate();
+  const { login } = useAuth(); // Access login function from context
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -28,8 +30,8 @@ function LoginPage() {
       if (!response.ok) throw new Error('Login failed');
       console.log('Login successful');
 
-      // Use navigate to redirect to the profile page
-      navigate('/profile'); // Updated from history.push('/profile');
+      login(); // Update the auth state to indicate the user is logged in
+      navigate('/profile'); // Navigate to the profile page
     } catch (error) {
       console.error('Login error:', error);
     }

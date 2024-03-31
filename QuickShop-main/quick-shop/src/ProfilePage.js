@@ -1,8 +1,10 @@
 import React from 'react';
-import './App.css';
+import { useAuth } from './AuthContext';
 
 function ProfilePage() {
-    // Placeholder for lists
+  const { logout } = useAuth();
+
+  // Placeholder for lists
   const shoppingLists = ['List 1', 'List 2', 'List 3'];
 
   return (
@@ -22,8 +24,10 @@ function ProfilePage() {
           ))}
         </ul>
       </div>
+      <button onClick={logout}>Logout</button>
     </div>
   );
 }
 
 export default ProfilePage;
+
