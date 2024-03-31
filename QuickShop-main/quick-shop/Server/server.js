@@ -25,10 +25,7 @@ main().catch(err => console.log(err));
 
 async function main() {
     try {
-        await mongoose.connect('mongodb+srv://JohnDoe:JohnDoe@cluster0.g3xygxt.mongodb.net/?retryWrites=true&w=majority');
-        //const mongoUri = 'mongodb+srv://Admin:admin@fooddatalist.zeatvsu.mongodb.net/FoodDataList?retryWrites=true&w=majority&appName=FoodDataList';
-        
-        //await mongoose.connect(mongoUri);   
+        await mongoose.connect('mongodb+srv://Admin:Admin@fooddatalist.zeatvsu.mongodb.net/?retryWrites=true&w=majority&appName=FoodDataList');   
         console.log('Connected to MongoDB');
     } catch (error) {
         console.error('Error connecting to MongoDB: ', error);
@@ -87,7 +84,27 @@ app.post('/api/register', async (req, res) => {
     }
 });
 
+app.post('/api/login', async (req, res) => {
+    try {
+        const { username, password } = req.body;
 
+        // Find the user by username
+        const user = await UserModel.findOne({ username: username });
+
+        // Check if user exists and password matches
+        if (user && user.password === password) {
+            console.log('Login successful for user:', username);
+            res.status(200).json({ message: "Login successful" });
+        } else {
+            // If user not found or password does not match
+            console.error('Login failed for user:', username);
+            res.status(401).json({ error: "Invalid username or password" });
+        }
+    } catch (error) {
+        console.error('Error during login:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 
 app.listen(port, () => {

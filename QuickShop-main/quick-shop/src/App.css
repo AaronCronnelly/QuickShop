@@ -687,6 +687,33 @@ nav ul li a {
 .get-route-button:hover {
   background-color:  #FFCC57;
 }
+/*  Profile Page */
+.profile-container {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-title, .user-info h3, .shopping-lists h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.user-info, .shopping-lists {
+  margin-bottom: 15px;
+}
+
+.user-info p, .shopping-lists ul {
+  margin-left: 20px;
+}
+
+.shopping-lists ul {
+  list-style-type: circle;
+}
+
 
 
 

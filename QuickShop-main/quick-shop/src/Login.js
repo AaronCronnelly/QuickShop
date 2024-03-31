@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import './App.css';
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
   const [loginData, setLoginData] = useState({
     username: '',
     password: '',
   });
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
-    // client-side validation example
     if (!loginData.username || !loginData.password) {
       alert("Please fill out all fields.");
       return;
@@ -28,6 +28,8 @@ function LoginPage() {
       if (!response.ok) throw new Error('Login failed');
       console.log('Login successful');
 
+      // Use navigate to redirect to the profile page
+      navigate('/profile'); // Updated from history.push('/profile');
     } catch (error) {
       console.error('Login error:', error);
     }
@@ -71,4 +73,5 @@ function LoginPage() {
 }
 
 export default LoginPage;
+
 

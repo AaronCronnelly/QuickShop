@@ -10,6 +10,7 @@ import Login from './Login';
 import ShoppingList from './ShoppingList';
 import RegisterPage from './RegisterPage';
 import Footer from './Footer';
+import ProfilePage from './ProfilePage';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/services" element={<Services/>} />
           <Route path="/shopping-list" element={<ShoppingList />} />
           <Route path="/RegisterPage" element={<RegisterPage/>} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
         <Footer />
       </div>
