@@ -25,7 +25,7 @@ main().catch(err => console.log(err));
 
 async function main() {
     try {
-        await mongoose.connect('mongodb+srv://Admin:Admin@fooddatalist.zeatvsu.mongodb.net/?retryWrites=true&w=majority&appName=FoodDataList');   
+        await mongoose.connect('mongodb+srv://Admin:Admin@fooddatalist.zeatvsu.mongodb.net/?retryWrites=true&w=majority&appName=FoodDataList');
         console.log('Connected to MongoDB');
     } catch (error) {
         console.error('Error connecting to MongoDB: ', error);
@@ -43,8 +43,8 @@ const userSchema = new mongoose.Schema({
     username: String,
     password: String,
     email: String
-  });
-  
+});
+
 const UserModel = mongoose.model('User', userSchema, 'UserList');
 
 const foodItemModel = mongoose.model('foodItemModel', foodItemsScheme);
@@ -59,17 +59,17 @@ app.get('/api/items', async (req, res) => {
     }
 });
 
-app.post('/api/fooditems', async (req,res)=>{
-    try{
-        const {foodName, type} = req.body;
-        const newFood=new foodItemsScheme({foodName, type});
+app.post('/api/items', async (req, res) => {
+    try {
+        const { foodName, type } = req.body;
+        const newFood = new foodItemsScheme({ foodName, type });
         const saveFoodItem = await newFood.save();
         console.log("Food item Added: ", saveFoodItem);
-        res.status(201).json({message: "Food items has been added successfully"});
-    }catch(error){
+        res.status(201).json({ message: "Food items has been added successfully" });
+    } catch (error) {
         console.error("Error adding food item", error);
-        if(!res.headersSent){
-            res.status(500).json({error: "Internal Server Error"});
+        if (!res.headersSent) {
+            res.status(500).json({ error: "Internal Server Error" });
         }
     }
 });
@@ -78,16 +78,16 @@ app.post('/api/register', async (req, res) => {
     try {
         // Get user data from request body
         const { username, password, email } = req.body;
-        
+
         // Check if user already exists
         const userExists = await UserModel.findOne({ email: email });
         if (userExists) {
             return res.status(409).json({ error: "User already exists" });
         }
-        
+
         // Create a new user instance with the plaintext password (Not secure)
         const newUser = new UserModel({ username, password, email });
-        
+
         // Save the new user to the database and log the result
         const savedUser = await newUser.save();
         console.log('User saved:', savedUser);

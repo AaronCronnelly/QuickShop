@@ -1,32 +1,30 @@
-import axios from "axios";
-import { response } from "express";
-import react from "react";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import React,{ useState } from "react";
 
-function Admin(){
+function Admin() {
     const [formData, setFormData] = useState({
         foodName: '',
         type: '',
-    })
-
+    });
+    const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if(!formData.foodName || !formData.type){
+        if (!formData.foodName || !formData.type) {
             alert("Please fill in data. ");
             return;
         }
 
-        try{
+        try {
             const response = await fetch('http://localhost:5001/api/items', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'apllication/json',
+                    'Content-Type': 'aplication/json',
                 },
                 body: JSON.stringify(formData),
             });
 
-        }catch(error){
+        } catch (error) {
             console.error('Admin Error: ', error);
         }
     };
@@ -34,10 +32,10 @@ function Admin(){
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevState => ({
-          ...prevState,
-          [name]: value
+            ...prevState,
+            [name]: value
         }));
-      };
+    };
 
     return (
         <div className="`FoodItemEntry">
@@ -45,20 +43,20 @@ function Admin(){
             <form onSubmit={handleSubmit} className="FoodItemForm">
                 <div>
                     <label><strong>Food Name</strong></label>
-                    <input 
-                    type="text"
-                    name="foodName"
-                    value={formData.foodName}
-                    onChange={handleChange}
+                    <input
+                        type="text"
+                        name="foodName"
+                        value={formData.foodName}
+                        onChange={handleChange}
                     />
                 </div>
                 <div>
-                <label><strong>Food Type</strong></label>
-                    <input 
-                    type="text"
-                    name="type"
-                    value={formData.type}
-                    onChange={handleChange}
+                    <label><strong>Food Type</strong></label>
+                    <input
+                        type="text"
+                        name="type"
+                        value={formData.type}
+                        onChange={handleChange}
                     />
                 </div>
                 <div>
@@ -66,7 +64,7 @@ function Admin(){
                 </div>
             </form>
         </div>
-    )
+    );
 }
 
 export default Admin;

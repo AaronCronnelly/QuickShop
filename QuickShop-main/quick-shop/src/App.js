@@ -32,7 +32,7 @@ const App = () => {
           <ProfilePage />
           </ProtectedRoute>
           } />
-          <Route path="/Admin" element={<Admin/>} />
+          <Route path="/admin" element={<Admin/>} />
         </Routes>
         <Footer />
       </div>
