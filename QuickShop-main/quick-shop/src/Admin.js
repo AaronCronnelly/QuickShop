@@ -3,28 +3,41 @@ import { response } from "express";
 import react from "react";
 import { useState } from "react";
 
-function Create(){
-    //Inputs
-    const [fname, setFName] = useState('');
-    const [type, setType] = useState('');
+function Admin(){
+    const [formData, setFormData] = useState({
+        foodName: '',
+        type: '',
+    })
 
-    //Handle submit of data
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("FoodName: " + fname + ", Type: " + type);
 
-        const foodItemModel = {
-            fname: fname,
-            type: type
-        };
+        if(!formData.foodName || !formData.type){
+            alert("Please fill in data. ");
+            return;
+        }
 
-        axios.post('http://localhost:5001/api/items', foodItemModel)
-        .then(response => {
+        try{
+            const response = await fetch('http://localhost:5001/api/items', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'apllication/json',
+                },
+                body: JSON.stringify(formData),
+            });
 
-        }).catch(error => {
-            console.log(console.error())
-        });
+        }catch(error){
+            console.error('Admin Error: ', error);
+        }
     };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prevState => ({
+          ...prevState,
+          [name]: value
+        }));
+      };
 
     return (
         <div className="`FoodItemEntry">
@@ -34,26 +47,26 @@ function Create(){
                     <label><strong>Food Name</strong></label>
                     <input 
                     type="text"
-                    className="Form-Entry"
-                    value={fname}
-                    onChange={(e)=>{setFName(e.target.value)}}
+                    name="foodName"
+                    value={formData.foodName}
+                    onChange={handleChange}
                     />
                 </div>
                 <div>
                 <label><strong>Food Type</strong></label>
                     <input 
                     type="text"
-                    className="Form-Entry"
-                    value={type}
-                    onChange={(e)=>{setType(e.target.value)}}
+                    name="type"
+                    value={formData.type}
+                    onChange={handleChange}
                     />
                 </div>
                 <div>
-                    <input type="submit" value="Add Food Item"/>
+                    <button type="submit">Add Food</button>
                 </div>
             </form>
         </div>
     )
 }
 
-export default Create;
+export default Admin;

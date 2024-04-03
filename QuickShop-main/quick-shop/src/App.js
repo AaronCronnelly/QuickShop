@@ -12,7 +12,7 @@ import Footer from './Footer';
 import ProfilePage from './ProfilePage';
 import { AuthProvider } from './AuthContext';
 import ProtectedRoute from './ProtectedRoute';
-
+import Admin from './Admin';
 
 const App = () => {
   return (
@@ -32,6 +32,7 @@ const App = () => {
           <ProfilePage />
           </ProtectedRoute>
           } />
+          <Route path="/Admin" element={<Admin/>} />
         </Routes>
         <Footer />
       </div>

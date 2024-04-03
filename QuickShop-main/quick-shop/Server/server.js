@@ -59,6 +59,21 @@ app.get('/api/items', async (req, res) => {
     }
 });
 
+app.post('/api/fooditems', async (req,res)=>{
+    try{
+        const {foodName, type} = req.body;
+        const newFood=new foodItemsScheme({foodName, type});
+        const saveFoodItem = await newFood.save();
+        console.log("Food item Added: ", saveFoodItem);
+        res.status(201).json({message: "Food items has been added successfully"});
+    }catch(error){
+        console.error("Error adding food item", error);
+        if(!res.headersSent){
+            res.status(500).json({error: "Internal Server Error"});
+        }
+    }
+});
+
 app.post('/api/register', async (req, res) => {
     try {
         // Get user data from request body

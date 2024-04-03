@@ -13,7 +13,10 @@ const Navbar = () => {
       </div>
       <div className="navbar-links">
         <NavLink to="/" activeClassName="navbar-active">Home</NavLink>
-        <NavLink to="/services" activeClassName="navbar-active">Services</NavLink> {/* Always visible */}
+        <NavLink to="/services" activeClassName="navbar-active">Services</NavLink> 
+        <NavLink to="/admin" activeClassName="navbar-active">AdminTesting</NavLink> 
+        {/* Tseting admin function */}
+        {/* Always visible */}
         
         {/* Conditional rendering based on isLoggedIn */}
         {!isLoggedIn ? (
