@@ -35,6 +35,7 @@ async function main() {
 // Define foodItems and model for MongoDB
 const foodItemsScheme = new mongoose.Schema({
     name: String,
+    type: String
 });
 
 // Define user schema and model for MongoDB
