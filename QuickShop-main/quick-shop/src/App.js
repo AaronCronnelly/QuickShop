@@ -13,6 +13,7 @@ import ProfilePage from './ProfilePage';
 import { AuthProvider } from './AuthContext';
 import ProtectedRoute from './ProtectedRoute';
 
+
 const App = () => {
   return (
     <AuthProvider>
