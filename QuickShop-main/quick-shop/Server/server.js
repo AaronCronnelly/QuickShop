@@ -46,8 +46,8 @@ const userSchema = new mongoose.Schema({
 });
 
 const UserModel = mongoose.model('User', userSchema, 'UserList');
-
 const foodItemModel = mongoose.model('foodItemModel', foodItemsScheme);
+
 
 app.get('/api/items', async (req, res) => {
     try {
@@ -62,10 +62,21 @@ app.get('/api/items', async (req, res) => {
 app.post('/api/items', async (req, res) => {
     try {
         const { foodName, type } = req.body;
-        const newFood = new foodItemsScheme({ foodName, type });
-        const saveFoodItem = await newFood.save();
-        console.log("Food item Added: ", saveFoodItem);
-        res.status(201).json({ message: "Food items has been added successfully" });
+
+        if (!foodName || !type) {
+            return res.status(400).json({ error: "Missing required properties in request body" });
+        }
+
+        const newFood = new foodItemModel({ name: foodName, type: type }); // Create a new instance using the model
+        const savedFoodItem = await newFood.save();
+
+        const response = {
+            name: savedFoodItem.name,
+            type: savedFoodItem.type
+        };
+
+        console.log("Food item Added: ", response);
+        res.status(201).json({ message: "Food item has been added successfully", data: response});
     } catch (error) {
         console.error("Error adding food item", error);
         if (!res.headersSent) {
