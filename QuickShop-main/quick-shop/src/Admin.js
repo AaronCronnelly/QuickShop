@@ -1,12 +1,10 @@
-import { useNavigate } from "react-router-dom";
-import React,{ useState } from "react";
+import React, { useState } from "react";
 
 function Admin() {
     const [formData, setFormData] = useState({
         foodName: '',
         type: '',
     });
-    const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
 

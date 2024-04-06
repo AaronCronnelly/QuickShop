@@ -62,21 +62,16 @@ app.get('/api/items', async (req, res) => {
 app.post('/api/items', async (req, res) => {
     try {
         const { foodName, type } = req.body;
-
-        if (!foodName || !type) {
-            return res.status(400).json({ error: "Missing required properties in request body" });
-        }
-
         const newFood = new foodItemModel({ name: foodName, type: type }); // Create a new instance using the model
         const savedFoodItem = await newFood.save();
 
-        const response = {
+        const responseData = {
             name: savedFoodItem.name,
             type: savedFoodItem.type
         };
 
-        console.log("Food item Added: ", response);
-        res.status(201).json({ message: "Food item has been added successfully", data: response});
+        console.log("Food item Added: ", responseData);
+        res.status(201).json({ message: "Food item has been added successfully", data: responseData});
     } catch (error) {
         console.error("Error adding food item", error);
         if (!res.headersSent) {
