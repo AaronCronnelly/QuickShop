@@ -17,7 +17,7 @@ function Admin() {
             const response = await fetch('http://localhost:5001/api/items', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'aplication/json',
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(formData),
             });
