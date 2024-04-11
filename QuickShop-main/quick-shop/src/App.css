@@ -651,7 +651,7 @@ nav ul li a {
 }
 
 .store-map {
-  flex: 1;
+  position: relative;
   max-width: 600px;
   height: auto; 
   overflow: hidden; 
@@ -713,6 +713,16 @@ nav ul li a {
 .shopping-lists ul {
   list-style-type: circle;
 }
+
+/* dot for map */
+.red-dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+}
+
 
 
 

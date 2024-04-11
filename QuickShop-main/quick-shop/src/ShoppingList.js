@@ -129,6 +129,9 @@ const ShoppingList = () => {
                 <button className="get-route-button" onClick={() => onGetRoute(selectedShop)}>
                  Get Route
                 </button>
+                <button className="get-item-button" onClick={() => onGetRoute(selectedShop)}>
+                 Get Item
+                </button>
             </div>
             <StoreMap items={matchingItems} />
         </div>
