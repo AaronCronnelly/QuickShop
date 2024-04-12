@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 function Admin() {
     const [formData, setFormData] = useState({
         foodName: '',
         type: '',
     });
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!formData.foodName || !formData.type) {
-            alert("Please fill in data. ");
+            alert("Please fill in all the data.");
             return;
         }
 
@@ -22,8 +23,19 @@ function Admin() {
                 body: JSON.stringify(formData),
             });
 
+            if (response.ok) {
+                // Reset the formData state to initial state
+                setFormData({ foodName: '', type: '' });
+                alert("Item added successfully.");
+            } else {
+                // If the server responds with an error status code
+                const errorResponse = await response.json();
+                alert(errorResponse.message); // Replace with actual error message property
+            }
+
         } catch (error) {
             console.error('Admin Error: ', error);
+            alert("An error occurred while trying to add the item.");
         }
     };
 
