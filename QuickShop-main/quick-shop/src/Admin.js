@@ -36,29 +36,31 @@ function Admin() {
     };
 
     return (
-        <div className="`FoodItemEntry">
-            <h1>Food Item Entry</h1>
-            <form onSubmit={handleSubmit} className="FoodItemForm">
-                <div>
+        <div className="admin-container">
+            <h1 className="admin-title">Food Item Entry</h1>
+            <form onSubmit={handleSubmit} className="admin-form">
+                <div className="admin-form-group">
                     <label><strong>Food Name</strong></label>
                     <input
                         type="text"
                         name="foodName"
                         value={formData.foodName}
                         onChange={handleChange}
+                        className="admin-input"
                     />
                 </div>
-                <div>
+                <div className="admin-form-group">
                     <label><strong>Food Type</strong></label>
                     <input
                         type="text"
                         name="type"
                         value={formData.type}
                         onChange={handleChange}
+                        className="admin-input"
                     />
                 </div>
-                <div>
-                    <button type="submit">Add Food</button>
+                <div className="admin-form-group">
+                    <button type="submit" className="admin-btn">Add Food</button>
                 </div>
             </form>
         </div>
