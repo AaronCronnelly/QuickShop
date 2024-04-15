@@ -30,7 +30,7 @@ function Admin() {
             } else {
                 // If the server responds with an error status code
                 const errorResponse = await response.json();
-                alert(errorResponse.message); // Replace with actual error message property
+                alert(errorResponse.message);
             }
 
         } catch (error) {
