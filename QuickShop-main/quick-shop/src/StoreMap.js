@@ -1,5 +1,6 @@
 import React from 'react';
 import map from './assets/images/map.png';
+import mapGrid from './assets/images/mapGrid.png';
 
 const StoreMap = ({ selectedShop, items }) => {
   const allItems = [
@@ -24,7 +25,11 @@ const StoreMap = ({ selectedShop, items }) => {
 
   return (
     <div className="store-map" style={{ position: 'relative' }}>
+      {/* Image without the grid */}
       <img src={map} alt="Store Layout" style={{ width: '100%', height: 'auto' }} />
+      {/* Image with the grid */}
+      <img src={mapGrid} alt="Map Grid" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: 'auto', opacity: 0.5 }} />
+      {/* Rendering items */}
       {allItems.map((item, index) => (
         <div key={index} style={{
           position: 'absolute',
@@ -36,10 +41,12 @@ const StoreMap = ({ selectedShop, items }) => {
           backgroundColor: 'red',
           borderRadius: '50%'
         }}>
+          {/* Add label for each item if needed */}
         </div>
       ))}
     </div>
   );
+  
 };
 
 export default StoreMap;

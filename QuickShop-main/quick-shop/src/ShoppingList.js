@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import StoreMap from './StoreMap';
+import map from './assets/images/map.png';
+import mapGrid from './assets/images/mapGrid.png';
+
 
 const ShoppingList = () => {
     const [items, setItems] = useState([]);
@@ -130,7 +133,7 @@ const ShoppingList = () => {
                  Get Route
                 </button>
             </div>
-            <StoreMap items={matchingItems} />
+            <StoreMap items={matchingItems} map={map} mapGrid={mapGrid} />
         </div>
         </div>
         </div>
