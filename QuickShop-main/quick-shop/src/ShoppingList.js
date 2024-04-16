@@ -4,7 +4,8 @@ import StoreMap from './StoreMap';
 import map from './assets/images/map.png';
 import mapGrid from './assets/images/mapGrid.png';
 import { getPathForShoppingList } from './pathfinding';
-import graph from './StoreMap';
+import { graph } from './StoreMap';
+
 
 const itemToSectionMap = {
     cheese: 'dairy',
@@ -56,8 +57,8 @@ const ShoppingList = () => {
 
     // GetRoute function
     const onGetRoute = () => {
-        //console.log("Sections derived from items:", sections);
-        // translate the items to their respective sections
+    console.log("Graph just before pathfinding:", graph);
+    console.log("Entrance node details:", graph['entrance']);   
         const sections = items.map(item => itemToSectionMap[item.name.toLowerCase()]);
       
         // calculate the path for these sections

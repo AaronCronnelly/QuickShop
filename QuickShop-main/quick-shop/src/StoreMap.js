@@ -5,7 +5,7 @@ import mapGrid from './assets/images/mapGrid.png';
 
 
 // Fixed graph structure
-const graph = {
+export const graph = {
   entrance: {
     coordinates: { x: 30, y: 225 },
     adjacent: {
