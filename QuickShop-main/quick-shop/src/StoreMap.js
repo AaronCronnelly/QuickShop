@@ -2,6 +2,37 @@ import React from 'react';
 import map from './assets/images/map.png';
 import mapGrid from './assets/images/mapGrid.png';
 
+const graph = {
+  entrance: {
+    coordinates: { x: 30, y: 225 },
+    adjacent: {
+      aisle1_start: 1,
+    },
+  },
+  aisle1_start: {
+    coordinates: { x: 2, y: 1 },
+    adjacent: {
+      entrance: 1,
+      aisle1_end: 1,
+    },
+  },
+  aisle1_end: {
+    coordinates: { x: 2, y: 2 },
+    adjacent: {
+      aisle1_start: 1,
+      aisle2_start: 1,
+    },
+  },
+  aisle2_start: {
+    coordinates: { x: 3, y: 2 },
+    adjacent: {
+      aisle1_end: 1,
+      aisle2_end: 1,
+    },
+  },
+};
+
+
 const StoreMap = ({ selectedShop, items }) => {
   const allItems = [
     ...items,  // spreads the existing items passed as props
@@ -10,6 +41,8 @@ const StoreMap = ({ selectedShop, items }) => {
   { name: 'pasta', x: 220, y: 290 },
   { name: 'bakery', x: 360, y: 230 },
   { name: 'dairy', x: 75, y: 220 },
+  { name: 'entrance', x: 30, y: 225 },
+  { name: 'exit', x: 320, y: 80 },
   /*{ name: 'frozen foods', x: 620, y: 350 },
   { name: 'canned goods', x: 368, y: 509 },
   { name: 'beverages', x: 550, y: 300 },
@@ -39,14 +72,15 @@ const StoreMap = ({ selectedShop, items }) => {
           width: '10px',
           height: '10px',
           backgroundColor: 'red',
-          borderRadius: '50%'
+          borderRadius: '50%',
+          zIndex: 1, // Ensure items are above the grid
         }}>
-          {/* Add label for each item if needed */}
+          {/* Display coordinates as text labels */}
+          <span style={{ position: 'absolute', color: 'black', fontSize: '12px', top: '-15px', left: '15px' }}>{`(${item.x}, ${item.y})`}</span>
         </div>
       ))}
     </div>
   );
-  
 };
 
 export default StoreMap;
