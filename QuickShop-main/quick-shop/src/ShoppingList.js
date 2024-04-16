@@ -10,6 +10,13 @@ import { graph } from './StoreMap';
 const itemToSectionMap = {
     cheese: 'dairy',
     bread: 'bakery',
+    tomato: 'fruit',
+    carrot: 'vegetables',
+    steak: 'meat',
+    spagetti: 'pasta',
+    ketchup: 'condiments',
+    salt: 'spices',
+    pepper: 'spices'
 };
 
 const ShoppingList = () => {

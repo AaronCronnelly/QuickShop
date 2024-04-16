@@ -11,20 +11,6 @@ export const graph = {
       aisle1_start: 1,
     },
   },
-  dairy: {
-    coordinates: { x: 75, y: 220 },
-    adjacent: {
-      aisle1_start: 1,
-    },
-  },
-  bakery: {
-    coordinates: { x: 360, y: 230 },
-    adjacent: {
-      aisle1_start: 1, // Connection to aisle1_start
-      dairy: 1,       // Connection to dairy section
-      aisle1_end: 1,  // Connection to aisle1_end
-    }, 
-  },
     // Aisle 1
     aisle1_start: {
       coordinates: { x: 100, y: 400 },
@@ -57,6 +43,7 @@ export const graph = {
         aisle2_start: 1,
         cereal: 1,
         rice: 1,
+        aisle3_start: 1,
       },
     },
     // Aisle 3
@@ -74,15 +61,139 @@ export const graph = {
         aisle3_start: 1,
         beverages: 1,
         snacks: 1,
+        aisle2_end: 1, 
+        aisle4_start: 1,
       },
     },
-  exit: {
-    coordinates: { x: 320, y: 80 },
+      // Aisle 4
+  aisle4_start: {
+    coordinates: { x: 160, y: 400 }, 
     adjacent: {
+      aisle3_end: 1,
+      aisle4_end: 1,
     },
   },
-};
+  aisle4_end: {
+    coordinates: { x: 160, y: 50 },
+    adjacent: {
+      aisle4_start: 1,
+      aisle5_start: 1, 
+    },
+  },
 
+  // Aisle 5
+  aisle5_start: {
+    coordinates: { x: 230, y: 400 }, 
+    adjacent: {
+      aisle4_end: 1,
+      aisle5_end: 1,
+    },
+  },
+  aisle5_end: {
+    coordinates: { x: 230, y: 50 },
+    adjacent: {
+      aisle5_start: 1,
+      aisle6_start: 1, 
+    },
+  },
+
+  // Aisle 6
+  aisle6_start: {
+    coordinates: { x: 300, y: 400 },
+    adjacent: {
+      aisle5_end: 1, 
+      aisle6_end: 1,
+    },
+  },
+  aisle6_end: {
+    coordinates: { x: 300, y: 50 },
+    adjacent: {
+      aisle6_start: 1,
+      aisle7_start: 1, 
+      register: 1,
+    },
+  },
+  // Aisle 7
+  aisle7_start: {
+    coordinates: { x: 370, y: 400 }, 
+    adjacent: {
+      aisle6_end: 1, 
+      aisle7_end: 1,
+    },
+  },
+  aisle7_end: {
+    coordinates: { x: 370, y: 50 }, 
+    adjacent: {
+      aisle7_start: 1,
+      register: 1,
+    },
+  },
+    fruit: {
+      coordinates: { x: 70, y: 320 },
+      adjacent: {
+        aisle1_start: 1,
+      },
+    },
+    vegetables: {
+      coordinates: { x: 170, y: 380 },
+      adjacent: {
+        aisle2_start: 1,
+      },
+    },
+    meat: {
+      coordinates: { x: 150, y: 160 },
+      adjacent: {
+        aisle1_end: 1,
+      },
+    },
+    condiments: {
+      coordinates: { x: 310, y: 300 },
+      adjacent: {
+        aisle3_end: 1, 
+        aisle4_start: 1,
+      },
+    },
+    pasta: {
+      coordinates: { x: 220, y: 290 },
+      adjacent: {
+        aisle3_start: 1,
+      },
+    },
+    spices: {
+      coordinates: { x: 240, y: 360 },
+      adjacent: {
+        aisle3_end: 1,
+      },
+    },
+    dairy: {
+      coordinates: { x: 70, y: 220 },
+      adjacent: {
+        aisle1_start: 1,
+        aisle2_start: 1,
+      },
+    },
+    bakery: {
+      coordinates: { x: 360, y: 230 },
+      adjacent: {
+        aisle1_start: 1,
+        dairy: 1,       
+        aisle1_end: 1,
+      }, 
+    },
+    register: {
+      coordinates: { x: 320, y: 400 },
+      adjacent: {
+        aisle6_end: 1,
+        exit: 1,
+      },
+    },
+    exit: {
+      coordinates: { x: 320, y: 80 },
+      adjacent: {
+        register: 1, // Direct connection from the register to the exit
+      },
+  },
+};
 
 const StoreMap = ({ selectedShop, items, route }) => {
   const [svgPathData, setSvgPathData] = useState('');

@@ -68,10 +68,17 @@ export function getPathForShoppingList(graph, shoppingList, startNode) {
       pathSegment.shift(); // Remove the first element to avoid duplication
       path = [...path, ...pathSegment];
       currentLocation = itemNode;
-
-      console.log("Current Path Segment:", pathSegment); // Debug statement to log current path segment
-      console.log("Current Path:", path); // Debug statement to log current path
     }
+
+    // After visiting all items, append the path to the register and then to the exit
+  const pathToRegister = reconstructPath(prev, currentLocation, 'register');
+  pathToRegister.shift(); // Remove the start node to avoid duplication
+  path = [...path, ...pathToRegister]; // Append path to register
+
+  // Now append the path to the exit
+  const pathToExit = reconstructPath(prev, 'register', 'exit');
+  pathToExit.shift(); // Remove the register node to avoid duplication
+  path = [...path, ...pathToExit]; // Append path to exit
   
     return path;
 }
