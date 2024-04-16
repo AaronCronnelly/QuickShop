@@ -3,12 +3,14 @@ import axios from 'axios';
 import StoreMap from './StoreMap';
 import map from './assets/images/map.png';
 import mapGrid from './assets/images/mapGrid.png';
+import { getPathForShoppingList } from './pathfinding';
+import graph from './StoreMap';
 
 const itemToSectionMap = {
     cheese: 'dairy',
     bread: 'bakery',
   };
-  
+
 const ShoppingList = () => {
     const [items, setItems] = useState([]);
     const [newItemName, setNewItemName] = useState('');
@@ -50,11 +52,21 @@ const ShoppingList = () => {
     const handleShopChange = (event) => {
         setSelectedShop(event.target.value);
     };
+    const [route, setRoute] = useState([]);
 
     // GetRoute function
-    const onGetRoute = (selectedShop) => {
-        console.log(`Getting route for: ${selectedShop}`);
-    };
+    const onGetRoute = () => {
+        // translate the items to their respective sections
+        const sections = items.map(item => itemToSectionMap[item.name.toLowerCase()]);
+      
+        // calculate the path for these sections
+        const calculatedPath = getPathForShoppingList(graph, sections, 'entrance');
+        
+        // Update the route state with the calculated path
+        setRoute(calculatedPath);
+      };
+      
+      <StoreMap items={matchingItems} route={route} selectedShop={selectedShop} />
 
     const handleAddItem = async (event) => {
         event.preventDefault();
@@ -63,8 +75,6 @@ const ShoppingList = () => {
         // Find the section for the new item
         const section = itemToSectionMap[newItemName.toLowerCase()];
         
-        // If the item is not found in the map, you could set a default section, 
-        // alert the user, or skip adding the item
         if (!section) {
           console.error("Item location not found"); // Handle this appropriately
           return;
@@ -145,8 +155,8 @@ const ShoppingList = () => {
                 <select id="shop-select" value={selectedShop} onChange={handleShopChange}>
                     <option value="aldi-galway">Aldi Galway</option>
                 </select>
-                <button className="get-route-button" onClick={() => onGetRoute(selectedShop)}>
-                 Get Route
+                <button className="get-route-button" onClick={onGetRoute}>
+                Get Route
                 </button>
             </div>
             <StoreMap items={matchingItems} map={map} mapGrid={mapGrid} />

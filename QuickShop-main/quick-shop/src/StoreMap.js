@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import map from './assets/images/map.png';
 import { dijkstra, reconstructPath, getPathForShoppingList } from './pathfinding';
 import mapGrid from './assets/images/mapGrid.png';
@@ -14,9 +14,11 @@ const graph = {
   },
   dairy: {
     coordinates: { x: 75, y: 220 },
-    adjacent: {
-      //sample for now
-    },
+    adjacent: {},
+  },
+  bakery: {
+    coordinates: { x: 360, y: 230 },
+    adjacent: {}, 
   },
   aisle1_start: {
     coordinates: { x: 60, y: 225 },
@@ -38,19 +40,25 @@ const graph = {
   },
 };
 
-  const StoreMap = ({ selectedShop, items }) => {
-    // items should be an array of item objects with 'section' property
-    React.useEffect(() => {
-      // Extract sections from items
-      const sections = items.map(item => item.section);
-      // Get a unique set of sections to avoid duplicates
-      const uniqueSections = Array.from(new Set(sections));
-      // Get the shopping path
-      const shoppingPath = getPathForShoppingList(graph, uniqueSections, 'entrance');
-  
-      // TODO: Render the path visually on the map
-      console.log(shoppingPath);
-    }, [items])
+const StoreMap = ({ selectedShop, items }) => {
+  const [svgPathData, setSvgPathData] = useState('');
+
+  useEffect(() => {
+    // Extract sections from items
+    const sections = items.map(item => item.section);
+    const shoppingPath = getPathForShoppingList(graph, sections, 'entrance');
+
+    // Calculate SVG path data
+    const calculatedSvgPath = shoppingPath.map(locationName => {
+      const node = graph[locationName];
+      return `${node.coordinates.x},${node.coordinates.y}`;
+    }).join(' L ');
+
+    // Update the state with the new SVG path data
+    setSvgPathData(`M ${calculatedSvgPath}`);
+  }, [items]);  // Dependency on items
+
+
   const allItems = [
     ...items,  // spreads the existing items passed as props
   { name: 'entrance', x: 30, y: 225 },
@@ -79,29 +87,24 @@ const graph = {
 
   return (
     <div className="store-map" style={{ position: 'relative' }}>
-      {/* Image without the grid */}
       <img src={map} alt="Store Layout" style={{ width: '100%', height: 'auto' }} />
-
-      {/* Image with the grid */}
+      <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
+        <path d={svgPathData} stroke="blue" strokeWidth="3" fill="none" />
+      </svg>
       <img src={mapGrid} alt="Map Grid" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: 'auto', opacity: 0.5 }} />
 
-      {/* Rendering items */}
-      {allItems.map((item, index) => (
+      {items.map((item, index) => (
         <div key={index} style={{
           position: 'absolute',
           left: `${item.x}px`,
           top: `${item.y}px`,
           transform: 'translate(-50%, -50%)',
         }}>
-          {/* Dot for the item */}
           <div className="red-dot"></div>
-
-          {/* Text label for the item */}
           <span className="label">{item.name}</span>
         </div>
       ))}
     </div>
   );
 };
-
 export default StoreMap;
