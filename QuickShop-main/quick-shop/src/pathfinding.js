@@ -1,29 +1,27 @@
-export function dijkstra(graph, startNode) {
+const dijkstra = (graph, startNode) => {
     const distances = {};
     const prev = {};
     const visited = new Set();
   
-    // Initialize distances and prev objects
     for (let node in graph) {
       distances[node] = Infinity;
       prev[node] = null;
     }
     distances[startNode] = 0;
-  
-    // The priority queue is represented by an array for simplicity
     const pq = [startNode];
   
-    while (pq.length !== 0) {
+    while (pq.length) {
       pq.sort((a, b) => distances[a] - distances[b]);
-  
-      const currentNode = pq.shift(); // The node with the smallest distance
+      const currentNode = pq.shift();
+      if (!graph[currentNode]) {
+        console.error("Missing node in graph:", currentNode);
+        continue; // Skip this node if it doesn't exist in the graph
+      }
       visited.add(currentNode);
   
-      const neighbors = graph[currentNode].adjacent;
-      for (let neighbor in neighbors) {
-        if (visited.has(neighbor)) continue; // Skip visited nodes
-  
-        const newDistance = distances[currentNode] + neighbors[neighbor];
+      for (let neighbor in graph[currentNode].adjacent) {
+        if (visited.has(neighbor)) continue;
+        const newDistance = distances[currentNode] + graph[currentNode].adjacent[neighbor];
         if (newDistance < distances[neighbor]) {
           distances[neighbor] = newDistance;
           prev[neighbor] = currentNode;
@@ -31,9 +29,8 @@ export function dijkstra(graph, startNode) {
         }
       }
     }
-  
     return { distances, prev };
-  }
+  };  
 
 export function reconstructPath(prev, startNode, endNode) {
     const path = [];

@@ -56,6 +56,7 @@ const ShoppingList = () => {
 
     // GetRoute function
     const onGetRoute = () => {
+        //console.log("Sections derived from items:", sections);
         // translate the items to their respective sections
         const sections = items.map(item => itemToSectionMap[item.name.toLowerCase()]);
       
