@@ -25,20 +25,57 @@ export const graph = {
       aisle1_end: 1,  // Connection to aisle1_end
     }, 
   },
-  aisle1_start: {
-    coordinates: { x: 60, y: 225 },
-    adjacent: {
-      entrance: 1,
-      aisle1_end: 1,
-      bakery: 1,  // Connection to bakery section
+    // Aisle 1
+    aisle1_start: {
+      coordinates: { x: 100, y: 400 },
+      adjacent: {
+        dairy: 1,
+        bakery: 1,
+        aisle1_end: 1,
+      },
     },
-  },
-  aisle1_end: {
-    coordinates: { x: 60, y: 250 },
-    adjacent: {
-      aisle1_start: 1,
+    aisle1_end: {
+      coordinates: { x: 100, y: 50 },
+      adjacent: {
+        aisle1_start: 1,
+        meat: 1,
+        fish: 1,
+      },
     },
-  },
+    // Aisle 2
+    aisle2_start: {
+      coordinates: { x: 200, y: 400 },
+      adjacent: {
+        fruit: 1,
+        vegetables: 1,
+        aisle2_end: 1,
+      },
+    },
+    aisle2_end: {
+      coordinates: { x: 200, y: 50 },
+      adjacent: {
+        aisle2_start: 1,
+        cereal: 1,
+        rice: 1,
+      },
+    },
+    // Aisle 3
+    aisle3_start: {
+      coordinates: { x: 300, y: 400 },
+      adjacent: {
+        spices: 1,
+        condiments: 1,
+        aisle3_end: 1,
+      },
+    },
+    aisle3_end: {
+      coordinates: { x: 300, y: 50 },
+      adjacent: {
+        aisle3_start: 1,
+        beverages: 1,
+        snacks: 1,
+      },
+    },
   exit: {
     coordinates: { x: 320, y: 80 },
     adjacent: {
@@ -97,6 +134,13 @@ const StoreMap = ({ selectedShop, items, route }) => {
       <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
         {/* Render the SVG path element with the calculated SVG path data */}
         <path d={svgPathData} stroke="blue" strokeWidth="3" fill="none" />
+        {/* Render SVG circles and labels for each item */}
+        {allItems.map((item, index) => (
+          <React.Fragment key={index}>
+            <circle cx={item.x} cy={item.y} r="5" fill="red" />
+            <text x={item.x} y={item.y - 10} fontSize="12" textAnchor="middle" text fontWeight="bold" fill="black">{item.name}</text>
+          </React.Fragment>
+        ))}
       </svg>
       <img src={mapGrid} alt="Map Grid" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: 'auto', opacity: 0.5 }} />
 
