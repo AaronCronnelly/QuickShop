@@ -3,12 +3,19 @@ import map from './assets/images/map.png';
 import { dijkstra, reconstructPath, getPathForShoppingList } from './pathfinding';
 import mapGrid from './assets/images/mapGrid.png';
 
+
 // Fixed graph structure
 const graph = {
   entrance: {
     coordinates: { x: 30, y: 225 },
     adjacent: {
       aisle1_start: 1,
+    },
+  },
+  dairy: {
+    coordinates: { x: 75, y: 220 },
+    adjacent: {
+      //sample for now
     },
   },
   aisle1_start: {
@@ -31,17 +38,23 @@ const graph = {
   },
 };
 
-const StoreMap = ({ selectedShop, items }) => {
-  React.useEffect(() => {
-    const shoppingListNodes = items.map(item => item.name); // Map items to their node names
-    const shoppingPath = getPathForShoppingList(graph, shoppingListNodes, 'entrance');
-    
-    console.log(shoppingPath);
-  }, [items]);
+  const StoreMap = ({ selectedShop, items }) => {
+    // items should be an array of item objects with 'section' property
+    React.useEffect(() => {
+      // Extract sections from items
+      const sections = items.map(item => item.section);
+      // Get a unique set of sections to avoid duplicates
+      const uniqueSections = Array.from(new Set(sections));
+      // Get the shopping path
+      const shoppingPath = getPathForShoppingList(graph, uniqueSections, 'entrance');
+  
+      // TODO: Render the path visually on the map
+      console.log(shoppingPath);
+    }, [items])
   const allItems = [
     ...items,  // spreads the existing items passed as props
   { name: 'entrance', x: 30, y: 225 },
-  { name: 'exit', x: 320, y: 80 },
+  { name: 'exit', x: 290, y: 70 },
   { name: 'register', x: 320, y: 400 },
   { name: 'snacks', x: 368, y: 480 },
   { name: 'pasta', x: 220, y: 290 },
@@ -53,6 +66,7 @@ const StoreMap = ({ selectedShop, items }) => {
   { name: 'meat', x: 150, y: 160 },
   { name: 'fish', x: 240, y: 110 },
   { name: 'cereal', x: 250, y: 260 },
+  { name: 'rice', x: 280, y: 230 },
   { name: 'spices', x: 240, y: 360 },
   { name: 'condiments', x: 310, y: 300 },
   { name: 'frozen foods', x: 430, y: 400 },

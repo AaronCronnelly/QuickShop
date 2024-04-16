@@ -4,7 +4,11 @@ import StoreMap from './StoreMap';
 import map from './assets/images/map.png';
 import mapGrid from './assets/images/mapGrid.png';
 
-
+const itemToSectionMap = {
+    cheese: 'dairy',
+    bread: 'bakery',
+  };
+  
 const ShoppingList = () => {
     const [items, setItems] = useState([]);
     const [newItemName, setNewItemName] = useState('');
@@ -55,24 +59,36 @@ const ShoppingList = () => {
     const handleAddItem = async (event) => {
         event.preventDefault();
         if (!newItemName) return; // Basic validation
-
-        const newItem = { name: newItemName, quantity: Number(quantity) };
-        if (editIndex >= 0) {
-            // Edit existing item
-            const updatedItems = items.map((item, index) =>
-                index === editIndex ? newItem : item
-            );
-            setItems(updatedItems);
-            setEditIndex(-1); // Reset edit index
-        } else {
-            // Add new item
-            setItems(prevItems => [...prevItems, newItem]);
+      
+        // Find the section for the new item
+        const section = itemToSectionMap[newItemName.toLowerCase()];
+        
+        // If the item is not found in the map, you could set a default section, 
+        // alert the user, or skip adding the item
+        if (!section) {
+          console.error("Item location not found"); // Handle this appropriately
+          return;
         }
-
+      
+        const newItem = { name: newItemName, section: section, quantity: Number(quantity) };
+        
+        if (editIndex >= 0) {
+          // Edit existing item
+          const updatedItems = items.map((item, index) =>
+            index === editIndex ? newItem : item
+          );
+          setItems(updatedItems);
+          setEditIndex(-1); // Reset edit index
+        } else {
+          // Add new item to the shopping list
+          setItems(prevItems => [...prevItems, newItem]);
+        }
+      
         // Reset the input fields
         setNewItemName('');
         setQuantity(1);
-    };
+      
+      };
 
     const handleEdit = (index) => {
         setEditIndex(index);
