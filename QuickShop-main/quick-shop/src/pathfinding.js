@@ -36,18 +36,23 @@ const dijkstra = (graph, startNode) => {
       }
     }
     return { distances, prev };
-  };  
+};  
 
 export function reconstructPath(prev, startNode, endNode) {
     const path = [];
     let currentNode = endNode;
-    while (currentNode !== null) {
+    while (currentNode !== null && currentNode !== startNode) {
       path.unshift(currentNode); // Add the node to the beginning of the path array
       currentNode = prev[currentNode]; // Move to the next node
     }
-    if (path[0] !== startNode) return [];
+    if (currentNode === startNode) {
+      path.unshift(startNode);
+    } else {
+      console.error("No valid path found between", startNode, "and", endNode);
+    }
     return path;
-  }
+}
+
 
 export function getPathForShoppingList(graph, shoppingList, startNode) {
     console.log("Graph within pathfinding function:", graph);
@@ -63,9 +68,12 @@ export function getPathForShoppingList(graph, shoppingList, startNode) {
       pathSegment.shift(); // Remove the first element to avoid duplication
       path = [...path, ...pathSegment];
       currentLocation = itemNode;
+
+      console.log("Current Path Segment:", pathSegment); // Debug statement to log current path segment
+      console.log("Current Path:", path); // Debug statement to log current path
     }
   
     return path;
-  }
-  
-  
+}
+
+

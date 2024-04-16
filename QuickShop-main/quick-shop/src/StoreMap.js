@@ -4,7 +4,6 @@ import { dijkstra, reconstructPath, getPathForShoppingList } from './pathfinding
 import mapGrid from './assets/images/mapGrid.png';
 
 
-// Fixed graph structure
 export const graph = {
   entrance: {
     coordinates: { x: 30, y: 225 },
@@ -14,17 +13,24 @@ export const graph = {
   },
   dairy: {
     coordinates: { x: 75, y: 220 },
-    adjacent: {},
+    adjacent: {
+      aisle1_start: 1,
+    },
   },
   bakery: {
     coordinates: { x: 360, y: 230 },
-    adjacent: {}, 
+    adjacent: {
+      aisle1_start: 1, // Connection to aisle1_start
+      dairy: 1,       // Connection to dairy section
+      aisle1_end: 1,  // Connection to aisle1_end
+    }, 
   },
   aisle1_start: {
     coordinates: { x: 60, y: 225 },
     adjacent: {
       entrance: 1,
       aisle1_end: 1,
+      bakery: 1,  // Connection to bakery section
     },
   },
   aisle1_end: {
@@ -40,23 +46,23 @@ export const graph = {
   },
 };
 
-const StoreMap = ({ selectedShop, items }) => {
+
+const StoreMap = ({ selectedShop, items, route }) => {
   const [svgPathData, setSvgPathData] = useState('');
 
   useEffect(() => {
-    // Extract sections from items
-    const sections = items.map(item => item.section);
-    const shoppingPath = getPathForShoppingList(graph, sections, 'entrance');
-
-    // Calculate SVG path data
-    const calculatedSvgPath = shoppingPath.map(locationName => {
-      const node = graph[locationName];
-      return `${node.coordinates.x},${node.coordinates.y}`;
-    }).join(' L ');
-
-    // Update the state with the new SVG path data
-    setSvgPathData(`M ${calculatedSvgPath}`);
-  }, [items]);  // Dependency on items
+    if (route && route.length > 0) {
+      const calculatedSvgPath = route.map(locationName => {
+        const node = graph[locationName];
+        return `${node.coordinates.x},${node.coordinates.y}`;
+      }).join(' L ');
+    
+      console.log("Calculated SVG Path:", calculatedSvgPath); // Debug statement to log calculated SVG path
+    
+      // Set the SVG path data as a valid SVG path
+      setSvgPathData(`M ${calculatedSvgPath}`);
+    }
+  }, [route]);  
 
 
   const allItems = [
@@ -89,10 +95,12 @@ const StoreMap = ({ selectedShop, items }) => {
     <div className="store-map" style={{ position: 'relative' }}>
       <img src={map} alt="Store Layout" style={{ width: '100%', height: 'auto' }} />
       <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
+        {/* Render the SVG path element with the calculated SVG path data */}
         <path d={svgPathData} stroke="blue" strokeWidth="3" fill="none" />
       </svg>
       <img src={mapGrid} alt="Map Grid" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: 'auto', opacity: 0.5 }} />
 
+      {/* Render items */}
       {items.map((item, index) => (
         <div key={index} style={{
           position: 'absolute',

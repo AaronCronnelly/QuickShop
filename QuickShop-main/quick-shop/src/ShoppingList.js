@@ -10,7 +10,7 @@ import { graph } from './StoreMap';
 const itemToSectionMap = {
     cheese: 'dairy',
     bread: 'bakery',
-  };
+};
 
 const ShoppingList = () => {
     const [items, setItems] = useState([]);
@@ -20,6 +20,7 @@ const ShoppingList = () => {
     const [matchingItems, setMatchingItems] = useState([]);
     // state to hold the selected shop
     const [selectedShop, setSelectedShop] = useState('aldi-galway');
+    const [route, setRoute] = useState([]);
 
     //Getting item from database
     useEffect(() => {
@@ -39,8 +40,8 @@ const ShoppingList = () => {
         const matching = items.filter(item => item.name.toLowerCase() === newItemName.toLowerCase());
         if (matching.length > 0) {
             setMatchingItems(matching);
-        }        
-    }, [items, newItemName]); 
+        }
+    }, [items, newItemName]);
 
     const handleNewItemNameChange = (event) => {
         setNewItemName(event.target.value);
@@ -53,54 +54,50 @@ const ShoppingList = () => {
     const handleShopChange = (event) => {
         setSelectedShop(event.target.value);
     };
-    const [route, setRoute] = useState([]);
 
     // GetRoute function
     const onGetRoute = () => {
-    console.log("Graph just before pathfinding:", graph);
-    console.log("Entrance node details:", graph['entrance']);   
+        console.log("Graph just before pathfinding:", graph);
+        console.log("Entrance node details:", graph['entrance']);
         const sections = items.map(item => itemToSectionMap[item.name.toLowerCase()]);
-      
+
         // calculate the path for these sections
         const calculatedPath = getPathForShoppingList(graph, sections, 'entrance');
-        
+
         // Update the route state with the calculated path
         setRoute(calculatedPath);
-      };
-      
-      <StoreMap items={matchingItems} route={route} selectedShop={selectedShop} />
+    };
 
     const handleAddItem = async (event) => {
         event.preventDefault();
         if (!newItemName) return; // Basic validation
-      
+
         // Find the section for the new item
         const section = itemToSectionMap[newItemName.toLowerCase()];
-        
+
         if (!section) {
-          console.error("Item location not found"); // Handle this appropriately
-          return;
+            console.error("Item location not found"); // Handle this appropriately
+            return;
         }
-      
+
         const newItem = { name: newItemName, section: section, quantity: Number(quantity) };
-        
+
         if (editIndex >= 0) {
-          // Edit existing item
-          const updatedItems = items.map((item, index) =>
-            index === editIndex ? newItem : item
-          );
-          setItems(updatedItems);
-          setEditIndex(-1); // Reset edit index
+            // Edit existing item
+            const updatedItems = items.map((item, index) =>
+                index === editIndex ? newItem : item
+            );
+            setItems(updatedItems);
+            setEditIndex(-1); // Reset edit index
         } else {
-          // Add new item to the shopping list
-          setItems(prevItems => [...prevItems, newItem]);
+            // Add new item to the shopping list
+            setItems(prevItems => [...prevItems, newItem]);
         }
-      
+
         // Reset the input fields
         setNewItemName('');
         setQuantity(1);
-      
-      };
+    };
 
     const handleEdit = (index) => {
         setEditIndex(index);
@@ -121,55 +118,52 @@ const ShoppingList = () => {
     return (
         <div className="list-and-map-container">
             <div className="shopping-list-container">
-            <h1 className="shopping-list-title">Create Your Shopping List</h1>
-            <form onSubmit={handleAddItem} className="shopping-list-form">
-                <input
-                    type="text"
-                    placeholder="Item name"
-                    value={newItemName}
-                    onChange={handleNewItemNameChange}
-                    className="shopping-list-input"
-                />
-                <input
-                    type="number"
-                    placeholder="Quantity"
-                    value={quantity}
-                    min="1"
-                    onChange={handleQuantityChange}
-                    className="shopping-list-input"
-                />
-                <button type="submit" className="shopping-list-button">
-                    {editIndex >= 0 ? 'Update Item' : 'Add Item'}
-                </button>
-            </form>
-            <ul className="shopping-list-items">
-                {items.map((item, index) => (
-                    <li key={index} className="shopping-list-item">
-                        {item.name} - Quantity: {item.quantity}
-                        <button onClick={() => handleEdit(index)} className="edit-item-button">Edit</button>
-                        <button onClick={() => handleDelete(index)} className="delete-item-button">Delete</button>
-                    </li>
-                ))}
-            </ul>
-            <div className="shopping-list-page">
-            <div className="shop-selector">
-                <label htmlFor="shop-select">Choose a shop:</label>
-                <select id="shop-select" value={selectedShop} onChange={handleShopChange}>
-                    <option value="aldi-galway">Aldi Galway</option>
-                </select>
-                <button className="get-route-button" onClick={onGetRoute}>
-                Get Route
-                </button>
+                <h1 className="shopping-list-title">Create Your Shopping List</h1>
+                <form onSubmit={handleAddItem} className="shopping-list-form">
+                    <input
+                        type="text"
+                        placeholder="Item name"
+                        value={newItemName}
+                        onChange={handleNewItemNameChange}
+                        className="shopping-list-input"
+                    />
+                    <input
+                        type="number"
+                        placeholder="Quantity"
+                        value={quantity}
+                        min="1"
+                        onChange={handleQuantityChange}
+                        className="shopping-list-input"
+                    />
+                    <button type="submit" className="shopping-list-button">
+                        {editIndex >= 0 ? 'Update Item' : 'Add Item'}
+                    </button>
+                </form>
+                <ul className="shopping-list-items">
+                    {items.map((item, index) => (
+                        <li key={index} className="shopping-list-item">
+                            {item.name} - Quantity: {item.quantity}
+                            <button onClick={() => handleEdit(index)} className="edit-item-button">Edit</button>
+                            <button onClick={() => handleDelete(index)} className="delete-item-button">Delete</button>
+                        </li>
+                    ))}
+                </ul>
+                <div className="shopping-list-page">
+                    <div className="shop-selector">
+                        <label htmlFor="shop-select">Choose a shop:</label>
+                        <select id="shop-select" value={selectedShop} onChange={handleShopChange}>
+                            <option value="aldi-galway">Aldi Galway</option>
+                        </select>
+                        <button className="get-route-button" onClick={onGetRoute}>
+                            Get Route
+                        </button>
+                    </div>
+                    {/* Include StoreMap component within the return statement */}
+                    <StoreMap items={matchingItems} route={route} selectedShop={selectedShop} />
+                </div>
             </div>
-            <StoreMap items={matchingItems} map={map} mapGrid={mapGrid} />
-        </div>
-        </div>
         </div>
     );
 };
 
 export default ShoppingList;
-
-
-
-
