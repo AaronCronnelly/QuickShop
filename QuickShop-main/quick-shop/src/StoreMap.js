@@ -1,5 +1,6 @@
 import React from 'react';
 import map from './assets/images/map.png';
+import { dijkstra, reconstructPath, getPathForShoppingList } from './pathfinding';
 import mapGrid from './assets/images/mapGrid.png';
 
 // Fixed graph structure
@@ -31,6 +32,12 @@ const graph = {
 };
 
 const StoreMap = ({ selectedShop, items }) => {
+  React.useEffect(() => {
+    const shoppingListNodes = items.map(item => item.name); // Map items to their node names
+    const shoppingPath = getPathForShoppingList(graph, shoppingListNodes, 'entrance');
+    
+    console.log(shoppingPath);
+  }, [items]);
   const allItems = [
     ...items,  // spreads the existing items passed as props
   { name: 'entrance', x: 30, y: 225 },
