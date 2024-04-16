@@ -60,8 +60,10 @@ const StoreMap = ({ selectedShop, items }) => {
     <div className="store-map" style={{ position: 'relative' }}>
       {/* Image without the grid */}
       <img src={map} alt="Store Layout" style={{ width: '100%', height: 'auto' }} />
+
       {/* Image with the grid */}
       <img src={mapGrid} alt="Map Grid" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: 'auto', opacity: 0.5 }} />
+
       {/* Rendering items */}
       {allItems.map((item, index) => (
         <div key={index} style={{
@@ -69,14 +71,12 @@ const StoreMap = ({ selectedShop, items }) => {
           left: `${item.x}px`,
           top: `${item.y}px`,
           transform: 'translate(-50%, -50%)',
-          width: '10px',
-          height: '10px',
-          backgroundColor: 'red',
-          borderRadius: '50%',
-          zIndex: 1, // Ensure items are above the grid
         }}>
-          {/* Display coordinates as text labels */}
-          <span style={{ position: 'absolute', color: 'black', fontSize: '12px', top: '-15px', left: '15px' }}>{`(${item.x}, ${item.y})`}</span>
+          {/* Dot for the item */}
+          <div className="red-dot"></div>
+
+          {/* Text label for the item */}
+          <span className="label">{item.name}</span>
         </div>
       ))}
     </div>

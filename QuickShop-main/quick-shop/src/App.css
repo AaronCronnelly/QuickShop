@@ -723,6 +723,22 @@ nav ul li a {
   border-radius: 50%;
 }
 
+/* Label for map items */
+.label {
+  position: absolute;
+  color: white;
+  background-color: black;
+  font-size: 12px;
+  padding: 2px 5px;
+  border-radius: 5px;
+  transform: translate(-50%, -50%);
+  top: 20px;
+  left: 50%;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+
 /* admin page */
 
 .admin-container {
