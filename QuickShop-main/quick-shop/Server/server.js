@@ -112,12 +112,6 @@ app.post('/api/login', async (req, res) => {
 
         // Find the user by username
         const user = await UserModel.findOne({ username: username });
-
-        //Log in with admin
-        if(username == "admin" && password == "admin")
-        {
-           return res.redirect('http://localhost:3000/admin')
-        }
         // Check if user exists and password matches
         if (user && user.password === password) {
             console.log('Login successful for user:', username);
