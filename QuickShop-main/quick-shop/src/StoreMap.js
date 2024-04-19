@@ -43,7 +43,6 @@ export const graph = {
         aisle2_start: 1,
         cereal: 1,
         rice: 1,
-        aisle3_start: 1,
       },
     },
     // Aisle 3
@@ -61,73 +60,73 @@ export const graph = {
         aisle3_start: 1,
         beverages: 1,
         snacks: 1,
-        aisle2_end: 1, 
-        aisle4_start: 1,
+        aisle2_end: 1,
+        aisle1_end: 1,
       },
     },
-      // Aisle 4
-  aisle4_start: {
-    coordinates: { x: 160, y: 400 }, 
-    adjacent: {
-      aisle3_end: 1,
-      aisle4_end: 1,
-    },
+    // Aisle 4
+aisle4_start: {
+  coordinates: { x: 160, y: 400 }, 
+  adjacent: {
+    aisle3_end: 1,
+    aisle4_end: 1,
   },
-  aisle4_end: {
-    coordinates: { x: 160, y: 50 },
-    adjacent: {
-      aisle4_start: 1,
-      aisle5_start: 1, 
-    },
+},
+aisle4_end: {
+  coordinates: { x: 160, y: 50 },
+  adjacent: {
+    aisle4_start: 1,
+    aisle5_start: 1, 
   },
+},
 
-  // Aisle 5
-  aisle5_start: {
-    coordinates: { x: 230, y: 400 }, 
-    adjacent: {
-      aisle4_end: 1,
-      aisle5_end: 1,
-    },
+// Aisle 5
+aisle5_start: {
+  coordinates: { x: 230, y: 400 }, 
+  adjacent: {
+    aisle4_end: 1,
+    aisle5_end: 1,
   },
-  aisle5_end: {
-    coordinates: { x: 230, y: 50 },
-    adjacent: {
-      aisle5_start: 1,
-      aisle6_start: 1, 
-    },
+},
+aisle5_end: {
+  coordinates: { x: 230, y: 50 },
+  adjacent: {
+    aisle5_start: 1,
+    aisle6_start: 1, 
   },
+},
 
-  // Aisle 6
-  aisle6_start: {
-    coordinates: { x: 300, y: 400 },
-    adjacent: {
-      aisle5_end: 1, 
-      aisle6_end: 1,
-    },
+// Aisle 6
+aisle6_start: {
+  coordinates: { x: 300, y: 400 },
+  adjacent: {
+    aisle5_end: 1, 
+    aisle6_end: 1,
   },
-  aisle6_end: {
-    coordinates: { x: 300, y: 50 },
-    adjacent: {
-      aisle6_start: 1,
-      aisle7_start: 1, 
-      register: 1,
-    },
+},
+aisle6_end: {
+  coordinates: { x: 300, y: 50 },
+  adjacent: {
+    aisle6_start: 1,
+    aisle7_start: 1, 
+    register: 1,
   },
-  // Aisle 7
-  aisle7_start: {
-    coordinates: { x: 370, y: 400 }, 
-    adjacent: {
-      aisle6_end: 1, 
-      aisle7_end: 1,
-    },
+},
+// Aisle 7
+aisle7_start: {
+  coordinates: { x: 370, y: 400 }, 
+  adjacent: {
+    aisle6_end: 1, 
+    aisle7_end: 1,
   },
-  aisle7_end: {
-    coordinates: { x: 370, y: 50 }, 
-    adjacent: {
-      aisle7_start: 1,
-      register: 1,
-    },
+},
+aisle7_end: {
+  coordinates: { x: 370, y: 50 }, 
+  adjacent: {
+    aisle7_start: 1,
+    register: 1,
   },
+},
     fruit: {
       coordinates: { x: 70, y: 320 },
       adjacent: {
@@ -150,7 +149,6 @@ export const graph = {
       coordinates: { x: 310, y: 300 },
       adjacent: {
         aisle3_end: 1, 
-        aisle4_start: 1,
       },
     },
     pasta: {
@@ -168,8 +166,7 @@ export const graph = {
     dairy: {
       coordinates: { x: 70, y: 220 },
       adjacent: {
-        aisle1_start: 1,
-        aisle2_start: 1,
+        aisle1_end: 1,
       },
     },
     bakery: {
@@ -183,7 +180,7 @@ export const graph = {
     register: {
       coordinates: { x: 320, y: 400 },
       adjacent: {
-        aisle6_end: 1,
+        aisle3_end: 1, // Or the correct aisle end node if 'aisle3_end' is not the right one
         exit: 1,
       },
     },
