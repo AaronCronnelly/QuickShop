@@ -14,7 +14,7 @@ const Navbar = () => {
       <div className="navbar-links">
         <NavLink to="/" activeClassName="navbar-active">Home</NavLink>
         <NavLink to="/services" activeClassName="navbar-active">Services</NavLink> 
-        <NavLink to="/admin" activeClassName="navbar-active">AdminTesting</NavLink> 
+        {/* <NavLink to="/admin" activeClassName="navbar-active">AdminTesting</NavLink>  */}
         {/* Tseting admin function */}
         {/* Always visible */}
         

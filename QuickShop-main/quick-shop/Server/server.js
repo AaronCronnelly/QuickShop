@@ -112,7 +112,6 @@ app.post('/api/login', async (req, res) => {
 
         // Find the user by username
         const user = await UserModel.findOne({ username: username });
-
         // Check if user exists and password matches
         if (user && user.password === password) {
             console.log('Login successful for user:', username);
