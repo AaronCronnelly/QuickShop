@@ -6,62 +6,62 @@ import mapGrid from './assets/images/mapGrid.png';
 
 export const graph = {
   entrance: {
-    coordinates: { x: 30, y: 225 },
+    coordinates: { x: 60, y: 260 },
     adjacent: {
       aisle1_start: 1,
     },
   },
     // Aisle 1
     aisle1_start: {
-      coordinates: { x: 100, y: 400 },
+      coordinates: { x: 60, y: 260 },
       adjacent: {
-        dairy: 1,
-        bakery: 1,
+        fruit: 0.5,
+        vegetables: 0.5, 
         aisle1_end: 1,
       },
     },
     aisle1_end: {
-      coordinates: { x: 100, y: 50 },
+      coordinates: {x: 368, y: 480 },
       adjacent: {
+        snacks: 0.1,
         aisle1_start: 1,
-        meat: 1,
-        fish: 1,
       },
     },
     // Aisle 2
     aisle2_start: {
-      coordinates: { x: 200, y: 400 },
+      coordinates: {x: 80, y: 240 },
       adjacent: {
-        fruit: 1,
-        vegetables: 1,
-        aisle2_end: 1,
+        dairy: 0.1, // Very close to dairy section
+        spices: 0.5, // Halfway down the aisle
+        pasta: 0.5, // Halfway down the aisle, opposite side from spices
+        aisle2_end: 1, // At the end near the register
       },
     },
     aisle2_end: {
-      coordinates: { x: 200, y: 50 },
+      coordinates: { x: 310, y: 380 },
       adjacent: {
-        aisle2_start: 1,
-        cereal: 1,
-        rice: 1,
+        register: 1, // Direct path to the register
+        spices: 0.5, // spices is halfway down aisle 2
+        aisle2_start: 1, // Direct path back to the start of aisle 2
       },
     },
     // Aisle 3
     aisle3_start: {
-      coordinates: { x: 300, y: 400 },
+      coordinates: { x: 140, y: 210 },
       adjacent: {
-        spices: 1,
-        condiments: 1,
-        aisle3_end: 1,
+        meat: 1, //meat section is near the start of aisle 3
+        pasta: 1, // Connection to pasta, adjust weight based on distance or walking time
+        aisle3_end: 1, // Direct path to the end of aisle 3
       },
     },
     aisle3_end: {
-      coordinates: { x: 300, y: 50 },
+      coordinates: { x: 390, y: 390 },
       adjacent: {
-        aisle3_start: 1,
-        beverages: 1,
-        snacks: 1,
-        aisle2_end: 1,
-        aisle1_end: 1,
+        sauce: 1, // Connection to sauce, adjust weight based on distance or walking time
+        cereal: 1, // Connection to cereal
+        condiments: 1, // Connection to condiments
+        aisle3_start: 1, // If the aisle can be traversed in both directions
+        aisle4_start: 1,
       },
     },
     // Aisle 4
@@ -127,18 +127,24 @@ aisle7_end: {
     register: 1,
   },
 },
-    fruit: {
-      coordinates: { x: 70, y: 320 },
-      adjacent: {
-        aisle1_start: 1,
-      },
-    },
-    vegetables: {
-      coordinates: { x: 170, y: 380 },
-      adjacent: {
-        aisle2_start: 1,
-      },
-    },
+fruit: {
+  coordinates: { x: 70, y: 320 },
+  adjacent: {
+    aisle1_start: 0.5, // Connect back to the start of aisle 1
+  },
+},
+vegetables: {
+  coordinates: { x: 170, y: 380 }, 
+  adjacent: {
+    aisle1_start: 0.5, // Connect back to the start of aisle 1
+  },
+},
+snacks: {
+  coordinates: { x: 368, y: 480 },
+  adjacent: {
+    aisle1_end: 0.1, // Connect back to the end of aisle 1
+  },
+},
     meat: {
       coordinates: { x: 150, y: 160 },
       adjacent: {
@@ -154,19 +160,28 @@ aisle7_end: {
     pasta: {
       coordinates: { x: 220, y: 290 },
       adjacent: {
+        aisle2_start: 0.5,
         aisle3_start: 1,
+        sauce: 1,
+      },
+    },
+    sauces: {
+      coordinates: { x: 280, y: 330 },
+      adjacent: {
+        aisle2_start: 0.5, // Connection back to the start of aisle 2
       },
     },
     spices: {
       coordinates: { x: 240, y: 360 },
       adjacent: {
-        aisle3_end: 1,
+        aisle2_end: 0.5, // Connection back to the end of aisle 2
       },
     },
     dairy: {
-      coordinates: { x: 70, y: 220 },
+      coordinates: {x: 75, y: 220 },
       adjacent: {
-        aisle1_end: 1,
+        aisle1_start: 1,
+        aisle2_start: 1,
       },
     },
     bakery: {
@@ -180,7 +195,7 @@ aisle7_end: {
     register: {
       coordinates: { x: 320, y: 400 },
       adjacent: {
-        aisle3_end: 1, // Or the correct aisle end node if 'aisle3_end' is not the right one
+        aisle3_end: 1,
         exit: 1,
       },
     },
@@ -233,7 +248,12 @@ const StoreMap = ({ selectedShop, items, route }) => {
   { name: 'household supplies', x: 500, y: 200 },
   { name: 'cans', x: 350, y: 280 },
   { name: 'beverages', x: 500, y: 300 },
-  { name: 'pet supplies', x: 560, y: 245 }
+  { name: 'pet supplies', x: 560, y: 245 },
+  { name: 'A1', x: 60, y: 260 },
+  { name: 'A2', x: 80, y: 240 },
+  { name: 'A2E', x: 310, y: 380},
+  { name: 'A3', x: 140, y: 210},
+  { name: 'A3E', x: 390, y: 390 }
   ];
 
   return (

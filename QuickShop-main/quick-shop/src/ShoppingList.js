@@ -11,9 +11,12 @@ const itemToSectionMap = {
     cheese: 'dairy',
     bread: 'bakery',
     tomato: 'fruit',
+    chocolate: 'snacks',
+    gum: 'snacks',
     carrot: 'vegetables',
     steak: 'meat',
     spagetti: 'pasta',
+    carbonara: 'sauce',
     ketchup: 'condiments',
     salt: 'spices',
     pepper: 'spices'
@@ -70,6 +73,7 @@ const ShoppingList = () => {
 
         // calculate the path for these sections
         const calculatedPath = getPathForShoppingList(graph, sections, 'entrance');
+        console.log("Calculated Path:", calculatedPath);
 
         // Update the route state with the calculated path
         setRoute(calculatedPath);
