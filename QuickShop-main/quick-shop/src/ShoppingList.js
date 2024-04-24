@@ -8,19 +8,137 @@ import { graph } from './StoreMap';
 
 
 const itemToSectionMap = {
+    // Dairy
     cheese: 'dairy',
+    milk: 'dairy',
+    yogurt: 'dairy',
+    butter: 'dairy',
+    eggs: 'dairy',
+    cream: 'dairy',
+
+    // Bakery
     bread: 'bakery',
+    croissant: 'bakery',
+    baguette: 'bakery',
+    muffin: 'bakery',
+    donut: 'bakery',
+    cake: 'bakery',
+
+    // Fruit
     tomato: 'fruit',
-    chocolate: 'snacks',
-    gum: 'snacks',
+    apple: 'fruit',
+    banana: 'fruit',
+    grapes: 'fruit',
+    orange: 'fruit',
+    lemon: 'fruit',
+    peach: 'fruit',
+    kiwi: 'fruit',
+    berries: 'fruit',
+
+    // Vegetables
     carrot: 'vegetables',
+    lettuce: 'vegetables',
+    cucumber: 'vegetables',
+    bellPepper: 'vegetables',
+    spinach: 'vegetables',
+    potato: 'vegetables',
+    onion: 'vegetables',
+    garlic: 'vegetables',
+
+    // Snacks
+    chocolate: 'snacks',
+    chips: 'snacks',
+    cookies: 'snacks',
+    gum: 'snacks',
+    candy: 'snacks',
+    popcorn: 'snacks',
+    nuts: 'snacks',
+
+    // Meat & Fish
     steak: 'meat',
+    chicken: 'meat',
+    pork: 'meat',
+    bacon: 'meat',
+    sausage: 'meat',
+    salami: 'meat',
+    fish: 'fish',
+    shrimp: 'fish',
+    salmon: 'fish',
+    tuna: 'fish',
+
+    // Pasta & Rice
     spagetti: 'pasta',
-    carbonara: 'sauce',
+    penne: 'pasta',
+    macaroni: 'pasta',
+    lasagna: 'pasta',
+    rice: 'rice',
+    brownRice: 'rice',
+    basmati: 'rice',
+
+    // Sauces & Condiments
     ketchup: 'condiments',
+    mustard: 'condiments',
+    mayo: 'condiments',
+    bbqSauce: 'sauces',
+    marinara: 'sauces',
+    alfredo: 'sauces',
+    soySauce: 'condiments',
+    oliveOil: 'condiments',
+
+    // Spices
     salt: 'spices',
-    pepper: 'spices'
-};
+    pepper: 'spices',
+    paprika: 'spices',
+    curryPowder: 'spices',
+    cinnamon: 'spices',
+
+    // Cereal
+    oatmeal: 'cereal',
+    cornflakes: 'cereal',
+    granola: 'cereal',
+    wheetabix: 'cereal',
+    // Frozen Foods
+    iceCream: 'frozen foods',
+    frozenPizza: 'frozen foods',
+    frozenVegetables: 'frozen foods',
+    frozenDinners: 'frozen foods',
+    frozenBerries: 'frozen foods',
+
+    // Health & Beauty
+    shampoo: 'health & beauty',
+    soap: 'health & beauty',
+    toothpaste: 'health & beauty',
+    deodorant: 'health & beauty',
+    lotion: 'health & beauty',
+
+    // Household Supplies
+    laundryDetergent: 'household supplies',
+    dishSoap: 'household supplies',
+    allPurposeCleaner: 'household supplies',
+    paperTowels: 'household supplies',
+    toiletPaper: 'household supplies',
+
+    // Canned Goods
+    beans: 'cans',
+    chickpeas: 'cans',
+    cannedFish: 'cans',
+    cannedSoup: 'cans',
+    cannedFruit: 'cans',
+
+    // Beverages
+    water: 'beverages',
+    juice: 'beverages',
+    soda: 'beverages',
+    coffee: 'beverages',
+    tea: 'beverages',
+
+    // Pet Supplies
+    dogFood: 'pet supplies',
+    catFood: 'pet supplies',
+    petShampoo: 'pet supplies',
+    catLitter: 'pet supplies',
+    petToys: 'pet supplies',
+}
 
 const ShoppingList = () => {
     const [items, setItems] = useState([]);

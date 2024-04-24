@@ -57,6 +57,7 @@ export const graph = {
     aisle3_end: {
       coordinates: { x: 390, y: 390 },
       adjacent: {
+        frozen_food: 0.5,
         sauce: 1, // Connection to sauce, adjust weight based on distance or walking time
         cereal: 1, // Connection to cereal
         condiments: 1, // Connection to condiments
@@ -151,30 +152,36 @@ snacks: {
         aisle1_end: 1,
       },
     },
-    condiments: {
-      coordinates: { x: 310, y: 300 },
-      adjacent: {
-        aisle3_end: 1, 
-      },
-    },
     pasta: {
       coordinates: { x: 220, y: 290 },
       adjacent: {
-        aisle2_start: 0.5,
-        aisle3_start: 1,
-        sauce: 1,
+        sauce: 0.1,
+        aisle3_start: 0.5,
       },
     },
     sauces: {
       coordinates: { x: 280, y: 330 },
       adjacent: {
-        aisle2_start: 0.5, // Connection back to the start of aisle 2
+        pasta: 0.1, // Directly adjacent to pasta
+        aisle3_end: 0.5,
       },
     },
     spices: {
       coordinates: { x: 240, y: 360 },
       adjacent: {
         aisle2_end: 0.5, // Connection back to the end of aisle 2
+      },
+    },
+    cereal: {
+      coordinates: {x: 250, y: 260 },
+      adjacent: {
+        aisle3_start: 0.5,
+      },
+    },
+    condiments: {
+      coordinates: { x: 310, y: 300 },
+      adjacent: {
+        aisle3_end: 0.5 
       },
     },
     dairy: {
