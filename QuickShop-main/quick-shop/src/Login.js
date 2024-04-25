@@ -4,13 +4,19 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext'; // Import useAuth hook
 
 function LoginPage() {
+  // State for login data
   const [loginData, setLoginData] = useState({
     username: '',
     password: '',
   });
-  const navigate = useNavigate();
-  const { login } = useAuth(); // Access login function from context
 
+  // Access the navigate function from the router
+  const navigate = useNavigate();
+  
+  // Access the login function from the AuthContext
+  const { login } = useAuth(); 
+
+  // Function to handle login submission
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!loginData.username || !loginData.password) {
@@ -19,6 +25,7 @@ function LoginPage() {
     }
 
     try {
+      // Send login request to server
       const response = await fetch('http://localhost:5001/api/login', {
         method: 'POST',
         headers: {
@@ -30,8 +37,11 @@ function LoginPage() {
       if (!response.ok) throw new Error('Login failed');
       console.log('Login successful');
 
-      login(); // Update the auth state to indicate the user is logged in
-      navigate('/profile'); // Navigate to the profile page
+      // Update the auth state to indicate the user is logged in
+      login(); 
+      
+      // Navigate to the profile page
+      navigate('/profile'); 
     } catch (error) {
       console.error('Login error:', error);
     }
@@ -75,5 +85,3 @@ function LoginPage() {
 }
 
 export default LoginPage;
-
-
