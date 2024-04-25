@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const mongoose = require('mongoose');
+const { ObjectId } = require('mongodb');
 
 main().catch(err => console.log(err));
 
@@ -44,6 +45,37 @@ const userSchema = new mongoose.Schema({
     password: String,
     email: String
 });
+
+const ShoppingListSchema = {
+    user: { type: ObjectId, ref: 'User' }, //Reference to the User model
+    name: String,
+    items: [String]
+};
+
+app.post('/api/lists:userId', async (req, res) => {
+    try {
+        //Extract list data and user ID from request body
+        const { userId, name, items } = req.body;
+
+        //Create a new shopping list doucment wiht user ID
+        const newShoppingList = {
+            user: userID,
+            name: name,
+            items: items
+        };
+
+        //Insert the new shoping list document into MongoDB
+        const result = await Db.collection('shoppingLists').insertOne(newShoppingList);
+
+        //Send success response
+        res.status(201).json({ message: 'Shopping list added successfully: ', id: result.insertedId });
+    } catch (error) {
+        //Send error response 
+        console.error('Error adding shopping list: ', error);
+        res.status(500).json({ errr: 'Failde to add shopping list' });
+    }
+});
+
 
 const UserModel = mongoose.model('User', userSchema, 'UserList');
 const foodItemModel = mongoose.model('foodItemModel', foodItemsScheme);
@@ -71,7 +103,7 @@ app.post('/api/items', async (req, res) => {
         };
 
         console.log("Food item Added: ", responseData);
-        res.status(201).json({ message: "Food item has been added successfully", data: responseData});
+        res.status(201).json({ message: "Food item has been added successfully", data: responseData });
     } catch (error) {
         console.error("Error adding food item", error);
         if (!res.headersSent) {

@@ -97,7 +97,7 @@ const itemToSectionMap = {
     cornflakes: 'cereal',
     granola: 'cereal',
     wheetabix: 'cereal',
-    
+
     // Frozen Foods
     iceCream: 'frozen foods',
     frozenPizza: 'frozen foods',
@@ -151,11 +151,12 @@ const ShoppingList = () => {
     const [selectedShop, setSelectedShop] = useState('aldi-galway');
     const [route, setRoute] = useState([]);
 
+
     //Getting item from database
     useEffect(() => {
         async function fetchItems() {
             try {
-                const response = await axios.get('/api/item');
+                const response = await axios.get('/api/item/:userId');
                 setItems(response.data);
             } catch (error) {
                 console.error('Error fetching items: ', error);
@@ -227,6 +228,24 @@ const ShoppingList = () => {
         // Reset the input fields
         setNewItemName('');
         setQuantity(1);
+
+        try {
+            //Send Post request to save the new item to backend
+            const response = await fetch('/api/list/:userId', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newItem)
+            });
+
+            //check if the erquest was successful
+            if (!response.ok) {
+                throw new Error('Failed to add item to shopping list');
+            }
+        } catch (error) {
+            console.error('Error adding item to shopping list: ', error);
+        }
     };
 
     const handleEdit = (index) => {

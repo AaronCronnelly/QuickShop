@@ -1,11 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuth } from './AuthContext';
 
 function ProfilePage() {
   const { logout } = useAuth();
+  const [shoppingLists, setShoppingLists]=useState([]);
+  // // Placeholder for lists
+  // const shoppingLists = ['List 1', 'List 2', 'List 3'];
 
-  // Placeholder for lists
-  const shoppingLists = ['List 1', 'List 2', 'List 3'];
+  useEffect(()=> {
+    const fetchShoppingList=async () => {
+      try{
+        //fetch shopping list form the backend 
+        const response = await fetch('/api/lists/:userId');
+        if(!response.ok){
+          throw new Error('Failed to fetch shopping lists');
+        }
+        const data = await response.json();
+        setShoppingLists(data);
+      }catch (error){
+        console.error('Error fetching shopping lsits: ', error);
+      }
+    }
+    fetchShoppingList();
+  }, []);
+
 
   return (
     <div className="profile-container">
