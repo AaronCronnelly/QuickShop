@@ -6,17 +6,19 @@ import mapGrid from './assets/images/mapGrid.png';
 
 export const graph = {
   entrance: {
-    coordinates: { x: 60, y: 260 },
+    coordinates: {  x: 30, y: 225 },
     adjacent: {
       aisle1_start: 1,
+      aisle3_start: 1,
     },
   },
     // Aisle 1
     aisle1_start: {
       coordinates: { x: 60, y: 260 },
       adjacent: {
-        fruit: 0.5,
-        vegetables: 0.5, 
+        entrance: 1,
+        //fruit: 0.5,
+        //vegetables: 0.5, 
         aisle1_end: 1,
       },
     },
@@ -49,6 +51,7 @@ export const graph = {
     aisle3_start: {
       coordinates: { x: 140, y: 210 },
       adjacent: {
+        entrance: 1,
         meat: 1, //meat section is near the start of aisle 3
         pasta: 1, // Connection to pasta, adjust weight based on distance or walking time
         aisle3_end: 1, // Direct path to the end of aisle 3
@@ -157,7 +160,9 @@ snacks: {
     meat: {
       coordinates: { x: 150, y: 160 },
       adjacent: {
-        aisle1_end: 1,
+        //aisle1_end: 0.5,
+        aisle3_start: 1,
+        cans: 0.5,
       },
     },
     pasta: {
@@ -204,7 +209,8 @@ snacks: {
     cans: {
       coordinates: { x: 350, y: 280 },
       adjacent: {
-        aisle4_end: 0.5, // connect back to the end of aisle 4
+        meat: 0.5, 
+        health_and_beauty: 0.5,
       },
     },
     dairy: {
@@ -225,13 +231,16 @@ snacks: {
   beverages: {
     coordinates: {  x: 500, y: 300 },
     adjacent: {
-    aisle6_end: 0.2, 
+      health_and_beauty: 0.5,
+      register: 0.5,
   },
 },
-health_and_beauty: {
+register: {
   coordinates: {x: 430, y: 160 },
   adjacent: {
-    aisle7_start: 0.5,
+    //aisle7_start: 0.5,
+    beverages: 0.5,
+    exit: 0.5,
   },
 },
 household_supplies: {
@@ -246,17 +255,17 @@ pet_supplies: {
     aisle7_end: 0.2, 
   },
 },
-    register: {
+    health_and_beauty: {
       coordinates: { x: 320, y: 400 },
       adjacent: {
-        aisle3_end: 1,
-        exit: 1,
+        cans: 0.5,
+        beverages: 0.5,
       },
     },
     exit: {
       coordinates: { x: 320, y: 80 },
       adjacent: {
-        register: 1, // Direct connection from the register to the exit
+        register: 0.5, // Direct connection from the register to the exit
       },
   },
 };
@@ -283,7 +292,7 @@ const StoreMap = ({ selectedShop, items, route }) => {
     ...items,  // spreads the existing items passed as props
   { name: 'entrance', x: 30, y: 225 },
   { name: 'exit', x: 290, y: 70 },
-  { name: 'register', x: 320, y: 400 },
+  { name: 'health & beauty', x: 320, y: 400 },
   { name: 'snacks', x: 368, y: 480 },
   { name: 'pasta', x: 220, y: 290 },
   { name: 'fruit', x: 70, y: 320 },
@@ -298,7 +307,7 @@ const StoreMap = ({ selectedShop, items, route }) => {
   { name: 'spices', x: 240, y: 360 },
   { name: 'condiments', x: 310, y: 300 },
   { name: 'frozen foods', x: 430, y: 400 },
-  { name: 'health & beauty', x: 430, y: 160 },
+  { name: 'register', x: 430, y: 160 },
   { name: 'household supplies', x: 500, y: 200 },
   { name: 'cans', x: 350, y: 280 },
   { name: 'beverages', x: 500, y: 300 },
