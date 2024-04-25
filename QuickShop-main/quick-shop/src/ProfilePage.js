@@ -11,7 +11,7 @@ function ProfilePage() {
     <div className="profile-container">
       <h2 className="profile-title">Profile</h2>
       <div className="user-info">
-        <h3>User Information</h3>
+        <h3>Your Information</h3>
         {/* Placeholder for user information */}
         <p><strong>Username:</strong> user123</p>
         <p><strong>Email:</strong> user@example.com</p>
@@ -24,7 +24,7 @@ function ProfilePage() {
           ))}
         </ul>
       </div>
-      <button onClick={logout}>Logout</button>
+      <button onClick={logout} className="register-btn">Logout</button>
     </div>
   );
 }
