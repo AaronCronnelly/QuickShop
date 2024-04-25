@@ -34,12 +34,14 @@ const Services = () => {
           title="Check Map"
           description="Check your detailed map here of your local supermarket"
           buttonText="View Map"
+          link="/shopping-list"
         />
         <ServiceCard
           image={service3}
           title="Log In"
           description="Login or register here to check your profile and previous lists"
           buttonText="Sign In"
+          link="/RegisterPage"
         />
       </div>
     </div>
