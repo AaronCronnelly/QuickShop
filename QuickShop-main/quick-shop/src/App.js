@@ -32,7 +32,6 @@ const App = () => {
           <ProfilePage />
           </ProtectedRoute>
           } />
-          <Route path="/admin" element={<Admin/>} />
         </Routes>
         <Footer />
       </div>

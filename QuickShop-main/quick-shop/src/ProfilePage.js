@@ -12,7 +12,7 @@ function ProfilePage() {
     const fetchShoppingList=async () => {
       try{
         //fetch shopping list form the backend 
-        const response = await fetch('/api/lists/${userId}');
+        const response = await fetch(`/api/lists/${userId}`);
         if(!response.ok){
           throw new Error('Failed to fetch shopping lists');
         }

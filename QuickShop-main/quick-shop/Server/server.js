@@ -2,10 +2,10 @@ const express = require('express');
 const app = express();
 const port = 5001;
 const cors = require('cors');
-// const path = require('path');
 const bodyParser=require("body-parser");
 const mongoose = require('mongoose');
 const { ObjectId } = require('mongodb');
+const url = require('url');
 
 //middleware
 app.use(cors());
@@ -24,7 +24,6 @@ app.use(function (req, res, next) {
 
 //Mongo Connection
 main().catch(err => console.log(err));
-
 async function main() {
     try {
         await mongoose.connect('mongodb+srv://Admin:Admin@fooddatalist.zeatvsu.mongodb.net/?retryWrites=true&w=majority&appName=FoodDataList');
