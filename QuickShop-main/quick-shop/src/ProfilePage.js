@@ -2,7 +2,7 @@ import React from 'react';
 import { useAuth } from './AuthContext';
 
 function ProfilePage() {
-  const { logout } = useAuth();
+  const { logout } = useAuth(); // Access logout function from AuthContext
 
   // Placeholder for lists
   const shoppingLists = ['List 1', 'List 2', 'List 3'];
@@ -19,15 +19,16 @@ function ProfilePage() {
       <div className="shopping-lists">
         <h3>Previous Shopping Lists</h3>
         <ul>
+          {/* Map over shoppingLists array to render list items */}
           {shoppingLists.map((list, index) => (
             <li key={index}>{list}</li>
           ))}
         </ul>
       </div>
+      {/* Logout button */}
       <button onClick={logout} className="register-btn">Logout</button>
     </div>
   );
 }
 
 export default ProfilePage;
-

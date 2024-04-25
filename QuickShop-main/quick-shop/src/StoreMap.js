@@ -271,21 +271,25 @@ pet_supplies: {
 };
 
 const StoreMap = ({ selectedShop, items, route }) => {
+  // State to store the SVG path data
   const [svgPathData, setSvgPathData] = useState('');
 
+  // Effect to update SVG path data when the route changes
   useEffect(() => {
     if (route && route.length > 0) {
+      // Calculate SVG path data based on the route
       const calculatedSvgPath = route.map(locationName => {
         const node = graph[locationName];
         return `${node.coordinates.x},${node.coordinates.y}`;
       }).join(' L ');
     
-      console.log("Calculated SVG Path:", calculatedSvgPath); // Debug statement to log calculated SVG path
+      // Debug statement to log calculated SVG path
+      console.log("Calculated SVG Path:", calculatedSvgPath);
     
       // Set the SVG path data as a valid SVG path
       setSvgPathData(`M ${calculatedSvgPath}`);
     }
-  }, [route]);  
+  }, [route]); // Dependency array ensures the effect runs only when 'route' changes 
 
 
   const allItems = [
@@ -312,7 +316,7 @@ const StoreMap = ({ selectedShop, items, route }) => {
   { name: 'cans', x: 350, y: 280 },
   { name: 'beverages', x: 500, y: 300 },
   { name: 'pet supplies', x: 560, y: 245 },
-  { name: 'A1', x: 60, y: 260 },
+  /*{ name: 'A1', x: 60, y: 260 },
   { name: 'A2', x: 80, y: 240 },
   { name: 'A2E', x: 310, y: 380},
   { name: 'A3', x: 140, y: 210},
@@ -324,7 +328,7 @@ const StoreMap = ({ selectedShop, items, route }) => {
   { name: 'A6', x: 280, y: 130},
   { name: 'A6E', x: 520, y: 280},
   { name: 'A7', x: 300, y: 100},
-  { name: 'A7E', x: 560, y: 280},
+  { name: 'A7E', x: 560, y: 280},*/
   ];
 
   return (

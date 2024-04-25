@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './App.css';
 import { Link } from 'react-router-dom';
 
-
 function RegisterPage() {
   const [formData, setFormData] = useState({
     username: '',
@@ -10,6 +9,7 @@ function RegisterPage() {
     password: '',
   });
 
+  // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -28,15 +28,15 @@ function RegisterPage() {
         body: JSON.stringify(formData),
       });
       
-    
-        if (!response.ok) throw new Error('Registration failed');
-        console.log('Registration successful');
-    
-        // Redirect to login page or clear form here
-      } catch (error) {
-        console.error('Registration error:', error);
-      }
-    };
+      if (!response.ok) throw new Error('Registration failed');
+      console.log('Registration successful');
+      
+      // Redirect to login page or clear form here
+      
+    } catch (error) {
+      console.error('Registration error:', error);
+    }
+  };
 
   // Function to handle changes in the form inputs
   const handleChange = (e) => {
@@ -88,4 +88,3 @@ function RegisterPage() {
 }
 
 export default RegisterPage;
-

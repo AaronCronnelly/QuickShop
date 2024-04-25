@@ -97,7 +97,7 @@ const itemToSectionMap = {
     cornflakes: 'cereal',
     granola: 'cereal',
     wheetabix: 'cereal',
-    
+
     // Frozen Foods
     iceCream: 'frozen foods',
     frozenPizza: 'frozen foods',
@@ -141,108 +141,77 @@ const itemToSectionMap = {
     petToys: 'pet supplies',
 }
 
+// ShoppingList component
 const ShoppingList = () => {
-    const [items, setItems] = useState([]);
-    const [newItemName, setNewItemName] = useState('');
-    const [quantity, setQuantity] = useState(1);
-    const [editIndex, setEditIndex] = useState(-1);
-    const [matchingItems, setMatchingItems] = useState([]);
-    // state to hold the selected shop
-    const [selectedShop, setSelectedShop] = useState('aldi-galway');
-    const [route, setRoute] = useState([]);
-
-    //Getting item from database
-    useEffect(() => {
-        async function fetchItems() {
-            try {
-                const response = await axios.get('/api/item');
-                setItems(response.data);
-            } catch (error) {
-                console.error('Error fetching items: ', error);
-            }
-        }
-        fetchItems();
-    }, []);
-
-    //Compaing user entered item to fetch database item
-    useEffect(() => {
-        const matching = items.filter(item => item.name.toLowerCase() === newItemName.toLowerCase());
-        if (matching.length > 0) {
-            setMatchingItems(matching);
-        }
-    }, [items, newItemName]);
-
+    // State variables
+    const [items, setItems] = useState([]); // Shopping list items
+    const [newItemName, setNewItemName] = useState(''); // Name of new item
+    const [quantity, setQuantity] = useState(1); // Quantity of new item
+    const [editIndex, setEditIndex] = useState(-1); // Index of item being edited
+    const [matchingItems, setMatchingItems] = useState([]); // Matching items in store
+    const [selectedShop, setSelectedShop] = useState('aldi-galway'); // Selected shop
+    const [route, setRoute] = useState([]); // Route for shopping list
+  
+    // Handlers for form inputs
     const handleNewItemNameChange = (event) => {
-        setNewItemName(event.target.value);
+      setNewItemName(event.target.value);
     };
-
+  
     const handleQuantityChange = (event) => {
-        setQuantity(event.target.value);
+      setQuantity(event.target.value);
     };
-
+  
     const handleShopChange = (event) => {
-        setSelectedShop(event.target.value);
+      setSelectedShop(event.target.value);
     };
-
-    // GetRoute function
+  
+    // Function to get route for shopping list
     const onGetRoute = () => {
-        console.log("Graph just before pathfinding:", graph);
-        console.log("Entrance node details:", graph['entrance']);
-        const sections = items.map(item => itemToSectionMap[item.name.toLowerCase()]);
-
-        // calculate the path for these sections
-        const calculatedPath = getPathForShoppingList(graph, sections, 'entrance');
-        console.log("Calculated Path:", calculatedPath);
-
-        // Update the route state with the calculated path
-        setRoute(calculatedPath);
+      const sections = items.map(item => itemToSectionMap[item.name.toLowerCase()]);
+      const calculatedPath = getPathForShoppingList(graph, sections, 'entrance');
+      setRoute(calculatedPath);
     };
-
-    const handleAddItem = async (event) => {
-        event.preventDefault();
-        if (!newItemName) return; // Basic validation
-
-        // Find the section for the new item
-        const section = itemToSectionMap[newItemName.toLowerCase()];
-
-        if (!section) {
-            console.error("Item location not found"); // Handle this appropriately
-            return;
-        }
-
-        const newItem = { name: newItemName, section: section, quantity: Number(quantity) };
-
-        if (editIndex >= 0) {
-            // Edit existing item
-            const updatedItems = items.map((item, index) =>
-                index === editIndex ? newItem : item
-            );
-            setItems(updatedItems);
-            setEditIndex(-1); // Reset edit index
-        } else {
-            // Add new item to the shopping list
-            setItems(prevItems => [...prevItems, newItem]);
-        }
-
-        // Reset the input fields
+  
+    // Handlers for adding, editing, and deleting items
+    const handleAddItem = (event) => {
+      event.preventDefault();
+      if (!newItemName) return;
+  
+      const section = itemToSectionMap[newItemName.toLowerCase()];
+      if (!section) {
+        console.error("Item location not found");
+        return;
+      }
+  
+      const newItem = { name: newItemName, section: section, quantity: Number(quantity) };
+  
+      if (editIndex >= 0) {
+        const updatedItems = items.map((item, index) =>
+          index === editIndex ? newItem : item
+        );
+        setItems(updatedItems);
+        setEditIndex(-1);
+      } else {
+        setItems(prevItems => [...prevItems, newItem]);
+      }
+  
+      setNewItemName('');
+      setQuantity(1);
+    };
+  
+    const handleEdit = (index) => {
+      setEditIndex(index);
+      setNewItemName(items[index].name);
+      setQuantity(items[index].quantity);
+    };
+  
+    const handleDelete = (index) => {
+      setItems(items.filter((_, i) => i !== index));
+      if (index === editIndex) {
+        setEditIndex(-1);
         setNewItemName('');
         setQuantity(1);
-    };
-
-    const handleEdit = (index) => {
-        setEditIndex(index);
-        setNewItemName(items[index].name);
-        setQuantity(items[index].quantity);
-    };
-
-    const handleDelete = (index) => {
-        setItems(items.filter((_, i) => i !== index));
-        // If currently editing and delete that item, reset the edit index
-        if (index === editIndex) {
-            setEditIndex(-1);
-            setNewItemName('');
-            setQuantity(1);
-        }
+      }
     };
 
     return (
@@ -288,7 +257,6 @@ const ShoppingList = () => {
                             Get Route
                         </button>
                     </div>
-                    {/* Include StoreMap component within the return statement */}
                     <StoreMap items={matchingItems} route={route} selectedShop={selectedShop} />
                 </div>
             </div>
