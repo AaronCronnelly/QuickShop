@@ -37,8 +37,13 @@ function LoginPage() {
       if (!response.ok) throw new Error('Login failed');
       console.log('Login successful');
 
+      //extract user data from server response
+      const userData = await response.json();
+      console.log('Login successful');
+
+
       // Update the auth state to indicate the user is logged in
-      login(); 
+      login(userData); 
       
       // Navigate to the profile page
       navigate('/profile'); 
