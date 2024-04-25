@@ -2,28 +2,28 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from './AuthContext';
 
 function ProfilePage() {
-  const [shoppingLists, setShoppingLists]=useState([]);
+  // const [shoppingLists, setShoppingLists]=useState([]);
   const { logout } = useAuth(); // Access logout function from AuthContext
-  const [userId, setuserId] = useState('');
+  // const [userId, setuserId] = useState('');
   // // Placeholder for lists
-  // const shoppingLists = ['List 1', 'List 2', 'List 3'];
+  const shoppingLists = ['List 1', 'List 2', 'List 3'];
 
-  useEffect(()=> {
-    const fetchShoppingList=async () => {
-      try{
-        //fetch shopping list form the backend 
-        const response = await fetch(`/api/lists/${userId}`);
-        if(!response.ok){
-          throw new Error('Failed to fetch shopping lists');
-        }
-        const data = await response.json();
-        setShoppingLists(data);
-      }catch (error){
-        console.error('Error fetching shopping lsits: ', error);
-      }
-    }
-    fetchShoppingList();
-  }, [userId]);
+  // useEffect(()=> {
+  //   const fetchShoppingList=async () => {
+  //     try{
+  //       //fetch shopping list form the backend 
+  //       const response = await fetch(`/api/lists/${userId}`);
+  //       if(!response.ok){
+  //         throw new Error('Failed to fetch shopping lists');
+  //       }
+  //       const data = await response.json();
+  //       setShoppingLists(data);
+  //     }catch (error){
+  //       console.error('Error fetching shopping lsits: ', error);
+  //     }
+  //   }
+  //   fetchShoppingList();
+  // }, [userId]);
 
   return (
     <div className="profile-container">

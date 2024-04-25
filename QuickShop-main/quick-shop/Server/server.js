@@ -5,13 +5,12 @@ const cors = require('cors');
 const bodyParser=require("body-parser");
 const mongoose = require('mongoose');
 const { ObjectId } = require('mongodb');
-const url = require('url');
+const path = require('path');
 
 //middleware
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
 
 //cors headers 
 app.use(function (req, res, next) {
@@ -20,7 +19,6 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
-
 
 //Mongo Connection
 main().catch(err => console.log(err));
@@ -47,48 +45,40 @@ const userSchema = new mongoose.Schema({
 });
 const UserModel = mongoose.model('User', userSchema, 'UserList');
 
-const ShoppingListSchema = new mongoose.Schema({
-    user: { type: ObjectId, ref: 'UserList' }, //Reference to the User model
-    name: String,
-    items: [String]
-});
+// const ShoppingListSchema = new mongoose.Schema({
+//     user: { type: ObjectId, ref: 'UserList' }, //Reference to the User model
+//     name: String,
+//     items: [String]
+// });
 
-const ShoppingList = mongoose.model('ShoppingList', ShoppingListSchema);
+// const ShoppingList = mongoose.model('ShoppingList', ShoppingListSchema);
 
 //Routes
-app.post('/api/lists/:userId', async (req, res) => {
-    try {
-        //Extract list data and user ID from request body
-        const{userId}=req.params;
-        const{name,items}=req.body;
-        //Create a new shopping list doucment wiht user ID
-        const newShoppingList = {
-            user: userId,
-            name: name,
-            items: items
-        };
+// app.post('/api/lists/:userId', async (req, res) => {
+//     try {
+//         // Extract list data and user ID from request body
+//         const { userId } = req.params;
+//         const { name, items } = req.body;
+        
+//         // Create a new shopping list document with user ID
+//         const newShoppingList = {
+//             user: userId,
+//             name: name,
+//             items: items
+//         };
 
-        //Insert the new shoping list document into MongoDB
-        // const result = await Db.collection('shoppingLists').insertOne(newShoppingList);
-        const result = await ShoppingList.create(newShoppingList);
-        //Send success response
-        res.status(201).json({ message: 'Shopping list added successfully: ', id: result._id });
-    } catch (error) {
-        //Send error response 
-        console.error('Error adding shopping list: ', error);
-        res.status(500).json({ errr: 'Failde to add shopping list' });
-    }
-});
+//         // Insert the new shopping list document into MongoDB using Mongoose model
+//         const result = await ShoppingList.create(newShoppingList);
 
-app.get('/api/items', async (req, res) => {
-    try {
-        const items = await foodItemModel.find();
-        res.json(items);
-    } catch (error) {
-        console.error('Error fetching items: ', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
+//         // Send success response
+//         res.status(201).json({ message: 'Shopping list added successfully: ', id: result._id });
+//     } catch (error) {
+//         // Send error response 
+//         console.error('Error adding shopping list: ', error);
+//         res.status(500).json({ error: 'Failed to add shopping list' });
+//     }
+// });
+
 
 app.post('/api/items', async (req, res) => {
     try {
