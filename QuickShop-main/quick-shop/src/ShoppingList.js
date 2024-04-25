@@ -97,6 +97,7 @@ const itemToSectionMap = {
     cornflakes: 'cereal',
     granola: 'cereal',
     wheetabix: 'cereal',
+    
     // Frozen Foods
     iceCream: 'frozen foods',
     frozenPizza: 'frozen foods',

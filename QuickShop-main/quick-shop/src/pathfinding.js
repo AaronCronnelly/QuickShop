@@ -38,6 +38,13 @@ const dijkstra = (graph, startNode) => {
     return { distances, prev };
 };  
 
+// Function to check if the graph is fully connected starting from a specific node
+export function isGraphConnected(graph, startNode) {
+  const { distances } = dijkstra(graph, startNode);
+  return Object.values(distances).every(distance => distance !== Infinity);
+}
+
+
 export function reconstructPath(prev, startNode, endNode) {
     const path = [];
     let currentNode = endNode;

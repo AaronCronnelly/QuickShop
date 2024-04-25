@@ -67,50 +67,57 @@ export const graph = {
     },
     // Aisle 4
 aisle4_start: {
-  coordinates: { x: 160, y: 400 }, 
+  coordinates: { x: 180, y: 190 }, 
   adjacent: {
-    aisle3_end: 1,
-    aisle4_end: 1,
+    cereal: 0.5,
+      aisle3_end: 1, // if direct access to aisle 3 end is available
+      aisle4_end: 1,
   },
 },
 aisle4_end: {
-  coordinates: { x: 160, y: 50 },
+  coordinates: { x: 430, y: 360 },
   adjacent: {
-    aisle4_start: 1,
-    aisle5_start: 1, 
+    cans: 0.5, //  cans is halfway down aisle 4 on the right
+    rice: 0.5, //  rice is halfway down aisle 4 on the right
+    aisle4_start: 1, // path back to the start of aisle 4
+    aisle5_start: 1,
   },
 },
 
 // Aisle 5
 aisle5_start: {
-  coordinates: { x: 230, y: 400 }, 
+  coordinates: {x: 225, y: 170 }, 
   adjacent: {
-    aisle4_end: 1,
+    aisle4_end: 1, // Connection to the end of Aisle 4 if it's directly adjacent
+    bakery: 0.5, // Halfway to the bakery section from the start
+    rice: 0.5, 
     aisle5_end: 1,
   },
 },
 aisle5_end: {
-  coordinates: { x: 230, y: 50 },
+  coordinates: { x: 460, y: 320 },
   adjacent: {
+    cans: 0.5, 
+    beverages: 0.1, // close to the beverages section
     aisle5_start: 1,
-    aisle6_start: 1, 
   },
 },
 
 // Aisle 6
 aisle6_start: {
-  coordinates: { x: 300, y: 400 },
+  coordinates: { x: 280, y: 130 },
   adjacent: {
+    bakery: 0.5,
     aisle5_end: 1, 
     aisle6_end: 1,
   },
 },
 aisle6_end: {
-  coordinates: { x: 300, y: 50 },
+  coordinates: { x: 520, y: 280 },
   adjacent: {
+    beverages: 0.2,
     aisle6_start: 1,
     aisle7_start: 1, 
-    register: 1,
   },
 },
 // Aisle 7
@@ -118,14 +125,15 @@ aisle7_start: {
   coordinates: { x: 370, y: 400 }, 
   adjacent: {
     aisle6_end: 1, 
+    health_and_beauty: 0.5,
     aisle7_end: 1,
   },
 },
 aisle7_end: {
   coordinates: { x: 370, y: 50 }, 
   adjacent: {
+    pet_supplies: 0.2,
     aisle7_start: 1,
-    register: 1,
   },
 },
 fruit: {
@@ -176,12 +184,27 @@ snacks: {
       coordinates: {x: 250, y: 260 },
       adjacent: {
         aisle3_start: 0.5,
+        aisle4_start: 0.5
       },
     },
     condiments: {
       coordinates: { x: 310, y: 300 },
       adjacent: {
         aisle3_end: 0.5 
+      },
+    },
+    rice: {
+      coordinates: { x: 280, y: 230 },
+      adjacent: {
+        aisle4_end: 0.5, // connect back to the end of aisle 4
+        aisle5_start: 0.5, // assuming rice is halfway down aisle 5
+        cans: 0.2,
+      },
+    },
+    cans: {
+      coordinates: { x: 350, y: 280 },
+      adjacent: {
+        aisle4_end: 0.5, // connect back to the end of aisle 4
       },
     },
     dairy: {
@@ -194,11 +217,35 @@ snacks: {
     bakery: {
       coordinates: { x: 360, y: 230 },
       adjacent: {
-        aisle1_start: 1,
-        dairy: 1,       
-        aisle1_end: 1,
+        aisle5_start: 0.5,
+        aisle5_end: 0.5,
+        aisle6_start: 0.5,
       }, 
-    },
+    }, 
+  beverages: {
+    coordinates: {  x: 500, y: 300 },
+    adjacent: {
+    aisle6_end: 0.2, 
+  },
+},
+health_and_beauty: {
+  coordinates: {x: 430, y: 160 },
+  adjacent: {
+    aisle7_start: 0.5,
+  },
+},
+household_supplies: {
+  coordinates: { x: 500, y: 200 }, 
+  adjacent: {
+    aisle7_start: 0.7,
+  },
+},
+pet_supplies: {
+  coordinates: { x: 560, y: 245 },
+  adjacent: {
+    aisle7_end: 0.2, 
+  },
+},
     register: {
       coordinates: { x: 320, y: 400 },
       adjacent: {
@@ -260,7 +307,15 @@ const StoreMap = ({ selectedShop, items, route }) => {
   { name: 'A2', x: 80, y: 240 },
   { name: 'A2E', x: 310, y: 380},
   { name: 'A3', x: 140, y: 210},
-  { name: 'A3E', x: 390, y: 390 }
+  { name: 'A3E', x: 390, y: 390 },
+  { name: 'A4', x: 180, y: 190},
+  { name: 'A4E', x: 430, y: 360},
+  { name: 'A5', x: 225, y: 170},
+  { name: 'A5E', x: 460, y: 320},
+  { name: 'A6', x: 280, y: 130},
+  { name: 'A6E', x: 520, y: 280},
+  { name: 'A7', x: 300, y: 100},
+  { name: 'A7E', x: 560, y: 280},
   ];
 
   return (
