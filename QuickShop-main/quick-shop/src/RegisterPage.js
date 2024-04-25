@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import { Link } from 'react-router-dom';
 
 
 function RegisterPage() {
@@ -77,8 +78,11 @@ function RegisterPage() {
             onChange={handleChange}
           />
         </div>
-        <button type="submit">Register</button>
+        <button type="submit" className="register-btn">Register</button>
       </form>
+      <div className="login-redirect">
+        <p>Already signed up? <Link to="/login">Log in here</Link></p>
+      </div>
     </div>
   );
 }
