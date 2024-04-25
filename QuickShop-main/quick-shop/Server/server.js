@@ -2,10 +2,18 @@ const express = require('express');
 const app = express();
 const port = 5001;
 const cors = require('cors');
-const path = require('path');
+// const path = require('path');
+const bodyParser=require("body-parser");
+const mongoose = require('mongoose');
+const { ObjectId } = require('mongodb');
 
+//middleware
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
+
+//cors headers 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
@@ -13,15 +21,8 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use(cors());
 
-const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-const mongoose = require('mongoose');
-const { ObjectId } = require('mongodb');
-
+//Mongo Connection
 main().catch(err => console.log(err));
 
 async function main() {
@@ -33,53 +34,52 @@ async function main() {
     }
 }
 
-// Define foodItems and model for MongoDB
+//Define schemas and models
 const foodItemsScheme = new mongoose.Schema({
     name: String,
     type: String
 });
+const foodItemModel = mongoose.model('foodItemModel', foodItemsScheme);
 
-// Define user schema and model for MongoDB
 const userSchema = new mongoose.Schema({
     username: String,
     password: String,
     email: String
 });
+const UserModel = mongoose.model('User', userSchema, 'UserList');
 
-const ShoppingListSchema = {
-    user: { type: ObjectId, ref: 'User' }, //Reference to the User model
+const ShoppingListSchema = new mongoose.Schema({
+    user: { type: ObjectId, ref: 'UserList' }, //Reference to the User model
     name: String,
     items: [String]
-};
+});
 
-app.post('/api/lists:userId', async (req, res) => {
+const ShoppingList = mongoose.model('ShoppingList', ShoppingListSchema);
+
+//Routes
+app.post('/api/lists/:userId', async (req, res) => {
     try {
         //Extract list data and user ID from request body
-        const { userId, name, items } = req.body;
-
+        const{userId}=req.params;
+        const{name,items}=req.body;
         //Create a new shopping list doucment wiht user ID
         const newShoppingList = {
-            user: userID,
+            user: userId,
             name: name,
             items: items
         };
 
         //Insert the new shoping list document into MongoDB
-        const result = await Db.collection('shoppingLists').insertOne(newShoppingList);
-
+        // const result = await Db.collection('shoppingLists').insertOne(newShoppingList);
+        const result = await ShoppingList.create(newShoppingList);
         //Send success response
-        res.status(201).json({ message: 'Shopping list added successfully: ', id: result.insertedId });
+        res.status(201).json({ message: 'Shopping list added successfully: ', id: result._id });
     } catch (error) {
         //Send error response 
         console.error('Error adding shopping list: ', error);
         res.status(500).json({ errr: 'Failde to add shopping list' });
     }
 });
-
-
-const UserModel = mongoose.model('User', userSchema, 'UserList');
-const foodItemModel = mongoose.model('foodItemModel', foodItemsScheme);
-
 
 app.get('/api/items', async (req, res) => {
     try {
@@ -158,7 +158,6 @@ app.post('/api/login', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

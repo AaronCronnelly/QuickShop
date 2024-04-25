@@ -3,6 +3,8 @@ import { useAuth } from './AuthContext';
 
 function ProfilePage() {
   const [shoppingLists, setShoppingLists]=useState([]);
+  const { logout } = useAuth(); // Access logout function from AuthContext
+  const [userId, setuserId] = useState('');
   // // Placeholder for lists
   // const shoppingLists = ['List 1', 'List 2', 'List 3'];
 
@@ -10,7 +12,7 @@ function ProfilePage() {
     const fetchShoppingList=async () => {
       try{
         //fetch shopping list form the backend 
-        const response = await fetch('/api/lists/:userId');
+        const response = await fetch('/api/lists/${userId}');
         if(!response.ok){
           throw new Error('Failed to fetch shopping lists');
         }
@@ -21,9 +23,7 @@ function ProfilePage() {
       }
     }
     fetchShoppingList();
-  }, []);
-  const { logout } = useAuth(); // Access logout function from AuthContext
-
+  }, [userId]);
 
   return (
     <div className="profile-container">

@@ -5,6 +5,7 @@ import map from './assets/images/map.png';
 import mapGrid from './assets/images/mapGrid.png';
 import { getPathForShoppingList } from './pathfinding';
 import { graph } from './StoreMap';
+import { json } from 'express';
 
 
 const itemToSectionMap = {
@@ -150,20 +151,42 @@ const ShoppingList = () => {
     // state to hold the selected shop
     const [selectedShop, setSelectedShop] = useState('aldi-galway');
     const [route, setRoute] = useState([]);
+    const [userId, setuserId] = useState('');
+
+
+    useEffect(() => {
+        const fetchUserId = async () => {
+            try {
+                const response = await fetch('/aip/userId');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch user ID');
+                }
+                const data = await response.json();
+                setuserId(data.userId);
+            } catch (error) {
+                console.error('Error fetching user ID: ', error);
+            }
+        };
+        fetchUserId();
+    }, []);
 
 
     //Getting item from database
     useEffect(() => {
         async function fetchItems() {
             try {
-                const response = await axios.get('/api/item/:userId');
+                const response = await axios.get('/api/item/&{userId}');
+                if(!response.ok){
+                    throw new Error('Failed to fetch items');
+                }
+                const data = await response.json();
                 setItems(response.data);
             } catch (error) {
                 console.error('Error fetching items: ', error);
             }
         }
         fetchItems();
-    }, []);
+    }, [userId]);
 
     //Compaing user entered item to fetch database item
     useEffect(() => {
@@ -205,7 +228,6 @@ const ShoppingList = () => {
 
         // Find the section for the new item
         const section = itemToSectionMap[newItemName.toLowerCase()];
-
         if (!section) {
             console.error("Item location not found"); // Handle this appropriately
             return;
@@ -228,24 +250,26 @@ const ShoppingList = () => {
         // Reset the input fields
         setNewItemName('');
         setQuantity(1);
-
-        try {
-            //Send Post request to save the new item to backend
-            const response = await fetch('/api/list/:userId', {
+    
+        try{
+            //send post request to save the new item to backend
+            const response=await fetch('/api/list/${userId', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(newItem)
+                body: JSON.stringify({
+                    items: items//send item array in the request body
+                })
             });
-
-            //check if the erquest was successful
-            if (!response.ok) {
+            //check if request was successfull
+            if(!response.ok){
                 throw new Error('Failed to add item to shopping list');
             }
-        } catch (error) {
+        }catch (error){
             console.error('Error adding item to shopping list: ', error);
         }
+
     };
 
     const handleEdit = (index) => {
